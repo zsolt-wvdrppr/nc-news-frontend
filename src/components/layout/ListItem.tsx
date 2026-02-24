@@ -53,7 +53,7 @@ export function ListItem({
                 style: { transitionDelay: "1s" },
               }}
             />
-            <Eye className="opacity-0 group-hover:opacity-100 transition-all absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 size-32 text-c-powderblue/80 backdrop-blur-sm rounded-full" />
+            <Eye className="opacity-0 group-hover:opacity-100 transition-all absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 size-32 text-c-burntpeach/80  bg-c-jetblack/40 backdrop-blur-sm rounded-full" />
           </Link>
           <div className="flex justify-between px-3">
             <span className="text-white font-semibold">
