@@ -2,6 +2,7 @@ export interface Article {
   article_id: number;
   title: string;
   topic: string;
+  body: string;
   author: string;
   created_at: string;
   article_img_url: string;

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router";
 import ArticleList from "./ArticleList";
+import SingleArticle from "./SingleArticle";
 import NotFound from "./NotFound";
 
 export function Layout({}: {}) {
@@ -12,6 +13,7 @@ export function Layout({}: {}) {
             <ArticleList presetFilters={[]} disableListControls={true} />
           }
         />
+        <Route path="/articles/:articleId" element={<SingleArticle />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

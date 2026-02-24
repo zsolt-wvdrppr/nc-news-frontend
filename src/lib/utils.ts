@@ -1,4 +1,6 @@
 export const formatDate = (dateStr: string) => {
+  if (!dateStr) return;
+
   const dayLookup = [
     "Monday",
     "Tuesday",

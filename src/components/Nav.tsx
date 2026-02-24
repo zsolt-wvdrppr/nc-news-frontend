@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import type { Page } from "../lib/types";
 import { Link, useLocation } from "react-router";
 
