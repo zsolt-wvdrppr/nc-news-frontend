@@ -21,20 +21,17 @@ export function ArticleList({
   console.log(disableListControls);
 
   return (
-    <>
-      <h1>ArticleList</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 items-end">
-        {articles.map((article) => {
-          return (
-            <ListItem
-              key={article.article_id}
-              article={article}
-              loading={loading}
-            />
-          );
-        })}
-      </div>
-    </>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-end">
+      {articles.map((article) => {
+        return (
+          <ListItem
+            key={article.article_id}
+            article={article}
+            loading={loading}
+          />
+        );
+      })}
+    </div>
   );
 }
 

@@ -7,3 +7,8 @@ export interface Article {
   article_img_url: string;
   votes: number;
 }
+
+export interface Page {
+  title: string;
+  path: string;
+}

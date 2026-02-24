@@ -21,10 +21,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  @apply w-full max-w-300 mx-auto;
-}
-
 h1 {
   @apply text-5xl;
 }

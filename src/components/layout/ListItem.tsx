@@ -1,7 +1,4 @@
-import {
-  LazyLoadImage,
-  trackWindowScroll,
-} from "react-lazy-load-image-component";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { preload } from "react-dom";
 import type { Article } from "../../lib/types";
 import { formatDate } from "../../lib/utils";
@@ -23,10 +20,12 @@ export function ListItem({
   return (
     <div
       key={article.article_id}
-      className="article-card m-8 flex flex-col justify-between gap-1"
+      className="article-card m-6 flex flex-col justify-between gap-1"
     >
       {!loading ?
-        <h3 className="font-bold text-xl h-full">{article?.title}</h3>
+        <h3 className="font-bold text-xl h-full text-c-jetblack">
+          {article?.title}
+        </h3>
       : <div className="flex flex-col gap-1">
           <div className="h-6.5 bg-c-powderblue rounded-2xl animate-pulse" />
           <div className="h-6.5 bg-c-powderblue rounded-2xl animate-pulse" />
