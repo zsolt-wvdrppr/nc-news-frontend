@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router";
 import ArticleList from "./ArticleList";
+import NotFound from "./NotFound";
 
 export function Layout({}: {}) {
   return (
-    <div className="max-w-screen">
+    <div className="max-w-screen min-h-screen">
       <Routes>
         <Route
           path="/"
@@ -11,6 +12,7 @@ export function Layout({}: {}) {
             <ArticleList presetFilters={[]} disableListControls={true} />
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
