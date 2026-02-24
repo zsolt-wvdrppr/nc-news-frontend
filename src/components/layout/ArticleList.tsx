@@ -21,7 +21,7 @@ export function ArticleList({
   console.log(disableListControls);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-end">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-400 items-end mx-auto">
       {articles.map((article) => {
         return (
           <ListItem
