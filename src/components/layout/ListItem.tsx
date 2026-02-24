@@ -5,6 +5,7 @@ import type { Article } from "../../lib/types";
 import { formatDate } from "../../lib/utils";
 import { ThumbsUp, Eye } from "lucide-react";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import VoteBar from "./VoteBar";
 
 export function ListItem({
   article,
@@ -59,18 +60,7 @@ export function ListItem({
             <span className="text-white font-semibold">
               {formatDate(article?.created_at)}
             </span>
-            <div className="flex flex-row gap-3 text-white">
-              <button aria-label="down-vote">
-                <ThumbsUp className="rotate-180 hover:animate-bounce cursor-pointer" />
-              </button>
-              <span className=" font-bold">{article?.votes}</span>
-              <button>
-                <ThumbsUp
-                  aria-label="up-vote"
-                  className="hover:animate-bounce  cursor-pointer"
-                />
-              </button>
-            </div>
+            <VoteBar article={article} />
           </div>
         </div>
       : <div className="h-61 bg-c-powderblue rounded-2xl animate-pulse" />}
