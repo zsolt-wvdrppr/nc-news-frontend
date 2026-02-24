@@ -11,7 +11,7 @@ export function ArticleList({
   disableListControls: boolean;
 }) {
   const [articles, setArticles] = useState<Array<Article>>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetchArticles(setArticles, setLoading);
@@ -23,9 +23,15 @@ export function ArticleList({
   return (
     <>
       <h1>ArticleList</h1>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 items-end">
         {articles.map((article) => {
-          return <ListItem article={article} />;
+          return (
+            <ListItem
+              key={article.article_id}
+              article={article}
+              loading={loading}
+            />
+          );
         })}
       </div>
     </>

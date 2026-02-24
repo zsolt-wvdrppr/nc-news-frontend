@@ -25,7 +25,6 @@ export const formatDate = (dateStr: string) => {
   ];
 
   const date = new Date(dateStr);
-  console.log(date);
   const output = `
   ${dayLookup[date.getDay()]},
   ${monthLookup[date.getMonth()]}. 
