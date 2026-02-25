@@ -1,9 +1,15 @@
 import { ThumbsUp } from "lucide-react";
 import type { Article } from "../../lib/types";
+import type { ComponentPropsWithoutRef } from "react";
 
-export function VoteBar({ article }: { article: Article }) {
+export function VoteBar({
+  article,
+  ...props
+}: {
+  article: Article;
+} & ComponentPropsWithoutRef<"div">) {
   return (
-    <div className="flex flex-row gap-3 text-white">
+    <div {...props}>
       <button aria-label="down-vote">
         <ThumbsUp className="rotate-180 hover:animate-bounce cursor-pointer" />
       </button>
