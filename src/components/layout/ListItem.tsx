@@ -4,7 +4,6 @@ import { Link } from "react-router";
 import type { Article } from "../../lib/types";
 import { formatDate } from "../../lib/utils";
 import { Eye } from "lucide-react";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import VoteBar from "./VoteBar";
 
 export function ListItem({
