@@ -28,7 +28,7 @@ export function SingleArticle({}) {
 
   return (
     <div className="max-w-250 p-8 mx-auto flex flex-col gap-10">
-      <h1>{article?.title}</h1>
+      <h1 className="text-c-jetblack">{article?.title}</h1>
       <div className="flex flex-row justify-between">
         <span>{formatDate(article?.created_at || "")}</span>
         <span>@{article?.author || ""}</span>

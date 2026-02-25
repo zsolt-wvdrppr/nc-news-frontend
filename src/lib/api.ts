@@ -13,17 +13,17 @@ export const fetchArticles = async (
     if (!queryParams) return "";
     let queryParamsStr = "";
     for (const [key, value] of Object.entries(queryParams)) {
-      queryParamsStr += "?" + key + " " + value;
+      queryParamsStr += "?" + key + "=" + value;
     }
 
-    return encodeURIComponent(queryParamsStr);
+    return queryParamsStr;
   };
 
   try {
     setLoading(true);
-    const response = await fetch(
-      BASE_URL + "articles" + getQueryParams(queryParams),
-    );
+    const urlToFetch = BASE_URL + "articles" + getQueryParams(queryParams);
+    console.log("Fetching", urlToFetch);
+    const response = await fetch(urlToFetch);
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
     const result = await response.json();
     const updatedArticles =
@@ -31,6 +31,7 @@ export const fetchArticles = async (
 
     setArticles(updatedArticles);
     setTotalCount(result.total_count);
+    console.log(result.total_count);
   } catch (err) {
     console.log(err);
   } finally {
@@ -68,10 +69,10 @@ export const fetchCommentsByArticleId = async (
     if (!queryParams) return "";
     let queryParamsStr = "";
     for (const [key, value] of Object.entries(queryParams)) {
-      queryParamsStr += "?" + key + " " + value;
+      queryParamsStr += "?" + key + "=" + value;
     }
 
-    return encodeURIComponent(queryParamsStr);
+    return queryParamsStr;
   };
 
   try {
