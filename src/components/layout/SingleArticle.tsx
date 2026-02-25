@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { formatDate } from "../../lib/utils";
 import { fetchArticleById } from "../../lib/api";
 import type { Article } from "../../lib/types";
+import VoteBar from "./VoteBar";
 
 export function SingleArticle({}) {
   const [article, setArticle] = useState<Article>();
@@ -22,6 +23,7 @@ export function SingleArticle({}) {
         <span>Author: {article?.author || ""}</span>
       </div>
       <p>{article?.body}</p>
+      {article && <VoteBar article={article} />}
     </div>
   );
 }
