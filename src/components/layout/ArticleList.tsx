@@ -12,13 +12,20 @@ export function ArticleList({
 }) {
   const [articles, setArticles] = useState<Array<Article>>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [queryParams, setQueryParams] = useState<Object>({});
+  const [totalCount, setTotalCount] = useState<number>(0);
 
   useEffect(() => {
-    fetchArticles(setArticles, setLoading);
-  }, []);
+    fetchArticles(
+      articles,
+      setArticles,
+      setLoading,
+      setTotalCount,
+      queryParams,
+    );
+  }, [queryParams]);
 
-  console.log(presetFilters);
-  console.log(disableListControls);
+  const tempvar = disableListControls && presetFilters;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-400 items-end mx-auto">
