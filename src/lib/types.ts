@@ -9,6 +9,15 @@ export interface Article {
   votes: number;
 }
 
+export interface Comment {
+  comment_id: number;
+  article_id: number;
+  body: string;
+  votes: number;
+  author: string;
+  created_at: string;
+}
+
 export interface Page {
   title: string;
   path: string;

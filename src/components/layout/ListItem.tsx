@@ -62,7 +62,7 @@ export function ListItem({
             {formatDate(article?.created_at)}
           </span>
           <VoteBar
-            article={article}
+            votes={Number(article.votes)}
             className="flex flex-row gap-3 text-white"
           />
         </div>
