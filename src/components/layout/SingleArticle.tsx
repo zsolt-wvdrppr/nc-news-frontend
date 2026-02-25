@@ -31,10 +31,16 @@ export function SingleArticle({}) {
       <h1>{article?.title}</h1>
       <div className="flex flex-row justify-between">
         <span>{formatDate(article?.created_at || "")}</span>
-        <span>Author: {article?.author || ""}</span>
+        <span>@{article?.author || ""}</span>
       </div>
       <p>{article?.body}</p>
-      {article && <VoteBar votes={Number(article.votes)} />}
+      {article && (
+        <VoteBar
+          votes={Number(article.votes)}
+          className="flex flex-wrap gap-6"
+        />
+      )}
+      <div className="border-b border-c-jetblack/50" />
       <CommentsSection comments={comments} />
     </div>
   );
