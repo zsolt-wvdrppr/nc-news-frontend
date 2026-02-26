@@ -2,29 +2,24 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { formatDate } from "../../lib/utils";
 import { fetchArticleById, fetchCommentsByArticleId } from "../../lib/api";
+import { useGetContent } from "../../lib/hooks/useArticles";
 import type { Article, Comment } from "../../lib/types";
 import VoteBar from "./VoteBar";
 import { CommentsSection } from "./CommentsSection";
 
 export function SingleArticle({}) {
-  const [article, setArticle] = useState<Article>();
-  const [loading, setLoading] = useState<boolean>(false);
   const [comments, setComments] = useState<Array<Comment>>([]);
-  const [totalCount, setTotalCount] = useState<number>(0);
 
   const { articleId } = useParams();
+  const numArticleId = Number(articleId);
 
-  useEffect(() => {
-    fetchArticleById(Number(articleId), setArticle, setLoading);
-    fetchCommentsByArticleId(
-      Number(articleId),
-      comments,
-      setComments,
-      setLoading,
-      setTotalCount,
-      {},
-    );
-  }, []);
+  const { content, error, loading } = useGetContent(fetchArticleById, {
+    articleId: numArticleId,
+  });
+
+  if (!content?.article || loading) return <p>Loading</p>;
+
+  const { article } = content;
 
   return (
     <div className="max-w-250 p-8 mx-auto flex flex-col gap-10">

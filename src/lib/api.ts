@@ -17,21 +17,15 @@ export const fetchArticles = async (options: Options) => {
   }
 };
 
-export const fetchArticleById = async (
-  articleId: number,
-  setArticle: (article: Article) => void,
-  setLoading: (loading: boolean) => void,
-) => {
+export const fetchArticleById = async (options: Options) => {
   try {
-    setLoading(true);
-    const response = await fetch(BASE_URL + "articles/" + articleId);
+    if (!options.articleId) throw new Error(`Missing articleId!`);
+    const response = await fetch(BASE_URL + "articles/" + options.articleId);
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
     const result = await response.json();
-    setArticle(result.article);
+    return result;
   } catch (err) {
-    console.log(err);
-  } finally {
-    setLoading(false);
+    if (err) return { error: err };
   }
 };
 

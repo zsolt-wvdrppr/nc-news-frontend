@@ -2,25 +2,22 @@ import { useEffect, useState } from "react";
 import type { Options, Content } from "../types";
 
 export const useGetContent = (
-  fetchFunction: (
-    queryParams: Object,
-    setError: (error: Object) => void,
-  ) => Promise<Content>,
+  fetchFunction: (queryParams: Object) => Promise<Content>,
   options: Options,
 ) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Object>();
+  const [error, setError] = useState<Error>();
   const [content, setContent] = useState<Content>();
 
   useEffect(() => {
     const fetchContent = async () => {
       try {
         setLoading(true);
-        const response = await fetchFunction(options, setError);
+        const response = await fetchFunction(options);
         if (response.error) throw new Error(`${response.error.message}`);
         setContent(response);
       } catch (err) {
-        if (err) setError(err);
+        if (err && err instanceof Error) setError(err);
       } finally {
         setLoading(false);
       }
