@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ListItem from "./ListItem";
 import { fetchArticles } from "../../lib/api";
 import type { Article } from "../../lib/types";
@@ -12,9 +12,9 @@ export function ArticleList({
 }) {
   const [articles, setArticles] = useState<Array<Article>>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [queryParams, setQueryParams] = useState<Object>({});
   const [totalCount, setTotalCount] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [queryParams, setQueryParams] = useState<Object>({});
+  const currentPage = useRef<number>(1);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, {
@@ -28,7 +28,7 @@ export function ArticleList({
 
   useEffect(() => {
     fetchArticles(articles, setArticles, setLoading, setTotalCount, {
-      p: currentPage,
+      p: currentPage.current,
     });
   }, []);
 
@@ -39,9 +39,9 @@ export function ArticleList({
 
     if (bottom) {
       console.log("BOTTOM!!! 💥", currentPage);
-      const pageToFetch = currentPage + 1;
+      const pageToFetch = currentPage.current + 1;
       console.log("next page", pageToFetch);
-      setCurrentPage(pageToFetch);
+      currentPage.current = pageToFetch;
 
       fetchArticles(articles, setArticles, setLoading, setTotalCount, {
         p: pageToFetch,
@@ -52,7 +52,7 @@ export function ArticleList({
   const tempvar = disableListControls && presetFilters;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 max-w-400 items-end mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 max-w-400 items-end mx-auto pt-12 p-3">
       {articles.map((article) => {
         return (
           <ListItem
