@@ -30,5 +30,6 @@ export interface Options {
 export interface Content {
   articles?: Article[];
   comments?: Comment[];
-  total_count: number;
+  total_count?: number;
+  error?: Error;
 }

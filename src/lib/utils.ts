@@ -34,3 +34,12 @@ export const formatDate = (dateStr: string) => {
 
   return output.toString();
 };
+
+export const formatQueryParams = (queryParams: Object) => {
+  if (!queryParams) return "";
+  let queryParamsStr = "";
+  for (const [key, value] of Object.entries(queryParams)) {
+    queryParamsStr += "?" + key + "=" + value;
+  }
+  return queryParamsStr;
+};

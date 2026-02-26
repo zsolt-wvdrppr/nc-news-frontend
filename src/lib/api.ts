@@ -1,33 +1,17 @@
 import type { Article, Comment } from "./types";
+import { formatQueryParams } from "./utils";
 
-const BASE_URL = "https://zsolts-news.onrender.com/api/";
+const BASE_URL = "https://zsolts-news.onrender.com/api/r";
 
-export const fetchArticles = async (
-  queryParams: Object,
-  setError: (error: Object) => void,
-) => {
-  const getQueryParams = (queryParams: Object) => {
-    if (!queryParams) return "";
-    let queryParamsStr = "";
-    for (const [key, value] of Object.entries(queryParams)) {
-      queryParamsStr += "?" + key + "=" + value;
-    }
-
-    return queryParamsStr;
-  };
-
+export const fetchArticles = async (queryParams: Object) => {
   try {
-    const urlToFetch = BASE_URL + "articles" + getQueryParams(queryParams);
-    console.log("Fetching", urlToFetch);
+    const urlToFetch = BASE_URL + "articles" + formatQueryParams(queryParams);
     const response = await fetch(urlToFetch);
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
     const result = await response.json();
-
-    console.log(result.total_count);
-
     return result;
   } catch (err) {
-    if (err) setError(err);
+    if (err) return { error: err };
   }
 };
 

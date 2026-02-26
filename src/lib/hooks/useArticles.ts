@@ -16,9 +16,9 @@ export const useGetContent = (
     const fetchContent = async () => {
       try {
         setLoading(true);
-        console.log("trying to fetch");
-        const _content = await fetchFunction(options, setError);
-        setContent(_content);
+        const response = await fetchFunction(options, setError);
+        if (response.error) throw new Error(`${response.error.message}`);
+        setContent(response);
       } catch (err) {
         if (err) setError(err);
       } finally {
