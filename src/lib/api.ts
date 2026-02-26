@@ -1,4 +1,4 @@
-import type { Comment, Options } from "./types";
+import type { Options } from "./types";
 import { formatQueryParams } from "./utils";
 
 const BASE_URL = "https://zsolts-news.onrender.com/api/";
@@ -29,43 +29,21 @@ export const fetchArticleById = async (options: Options) => {
   }
 };
 
-export const fetchCommentsByArticleId = async (
-  articleId: number,
-  comments: Array<Comment>,
-  setComments: (comments: Comment[]) => void,
-  setLoading: (loading: boolean) => void,
-  setTotalCount: (totalCount: number) => void,
-  queryParams: Object,
-) => {
-  const getQueryParams = (queryParams: Object) => {
-    if (!queryParams) return "";
-    let queryParamsStr = "";
-    for (const [key, value] of Object.entries(queryParams)) {
-      queryParamsStr += "?" + key + "=" + value;
-    }
-
-    return queryParamsStr;
-  };
-
+export const fetchCommentsByArticleId = async (options: Options) => {
   try {
-    setLoading(true);
+    if (!options.articleId) throw new Error(`Missing articleId!`);
     const response = await fetch(
       BASE_URL +
         "articles/" +
-        articleId +
+        options.articleId +
         "/comments" +
-        getQueryParams(queryParams),
+        formatQueryParams(options.queryParams || {}),
     );
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
     const result = await response.json();
-    const updatedComments =
-      comments ? comments.concat(result.comments) : result.comments;
-
-    setComments(updatedComments);
-    setTotalCount(result.total_count);
+    console.log("res", result);
+    return result;
   } catch (err) {
-    console.log(err);
-  } finally {
-    setLoading(false);
+    if (err) return { error: err };
   }
 };

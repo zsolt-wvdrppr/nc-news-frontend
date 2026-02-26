@@ -1,21 +1,27 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { formatDate } from "../../lib/utils";
 import { fetchArticleById, fetchCommentsByArticleId } from "../../lib/api";
 import { useGetContent } from "../../lib/hooks/useArticles";
-import type { Article, Comment } from "../../lib/types";
 import VoteBar from "./VoteBar";
 import { CommentsSection } from "./CommentsSection";
 
 export function SingleArticle({}) {
-  const [comments, setComments] = useState<Array<Comment>>([]);
-
   const { articleId } = useParams();
   const numArticleId = Number(articleId);
 
   const { content, error, loading } = useGetContent(fetchArticleById, {
     articleId: numArticleId,
   });
+
+  const {
+    content: commentsContent,
+    error: commentsError,
+    loading: commentsLoading,
+  } = useGetContent(fetchCommentsByArticleId, {
+    articleId: numArticleId,
+  });
+
+  console.log(commentsContent);
 
   if (!content?.article || loading) return <p>Loading</p>;
   if (error) return <p>{error.message}</p>;
@@ -37,7 +43,9 @@ export function SingleArticle({}) {
         />
       )}
       <div className="border-b border-c-jetblack/50" />
-      <CommentsSection comments={comments} />
+      {commentsContent?.comments && (
+        <CommentsSection comments={commentsContent.comments} />
+      )}
     </div>
   );
 }
