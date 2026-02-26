@@ -18,6 +18,7 @@ export function SingleArticle({}) {
   });
 
   if (!content?.article || loading) return <p>Loading</p>;
+  if (error) return <p>{error.message}</p>;
 
   const { article } = content;
 

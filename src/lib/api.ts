@@ -1,4 +1,4 @@
-import type { Article, Comment, Options } from "./types";
+import type { Comment, Options } from "./types";
 import { formatQueryParams } from "./utils";
 
 const BASE_URL = "https://zsolts-news.onrender.com/api/";
