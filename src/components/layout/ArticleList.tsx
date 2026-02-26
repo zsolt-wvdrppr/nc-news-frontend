@@ -10,7 +10,7 @@ export function ArticleList({
   disableListControls: boolean;
 }) {
   const { content, error, loading } = useGetContent(fetchArticles, {
-    limit: 100,
+    queryParams: { limit: 100 },
   });
 
   const tempvar = disableListControls && presetFilters;

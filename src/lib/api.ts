@@ -1,11 +1,13 @@
-import type { Article, Comment } from "./types";
+import type { Article, Comment, Options } from "./types";
 import { formatQueryParams } from "./utils";
 
-const BASE_URL = "https://zsolts-news.onrender.com/api/r";
+const BASE_URL = "https://zsolts-news.onrender.com/api/";
 
-export const fetchArticles = async (queryParams: Object) => {
+export const fetchArticles = async (options: Options) => {
   try {
-    const urlToFetch = BASE_URL + "articles" + formatQueryParams(queryParams);
+    if (!options.queryParams) throw new Error(`Missing query parameters!`);
+    const urlToFetch =
+      BASE_URL + "articles" + formatQueryParams(options.queryParams);
     const response = await fetch(urlToFetch);
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
     const result = await response.json();

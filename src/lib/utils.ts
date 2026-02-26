@@ -1,3 +1,5 @@
+import type { QueryParams } from "./types";
+
 export const formatDate = (dateStr: string) => {
   if (!dateStr) return;
 
@@ -35,7 +37,7 @@ export const formatDate = (dateStr: string) => {
   return output.toString();
 };
 
-export const formatQueryParams = (queryParams: Object) => {
+export const formatQueryParams = (queryParams: QueryParams) => {
   if (!queryParams) return "";
   let queryParamsStr = "";
   for (const [key, value] of Object.entries(queryParams)) {

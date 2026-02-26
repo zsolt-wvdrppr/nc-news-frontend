@@ -23,8 +23,14 @@ export interface Page {
   path: string;
 }
 
+export interface QueryParams {
+  limit?: number;
+  p?: number;
+}
+
 export interface Options {
-  limit: number;
+  queryParams?: QueryParams;
+  articleId?: number;
 }
 
 export interface Content {
