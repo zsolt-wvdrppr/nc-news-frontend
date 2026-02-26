@@ -1,7 +1,7 @@
 import type { Options } from "./types";
 import { formatQueryParams } from "./utils";
 
-const BASE_URL = "https://zsolts-news.onrender.com/ap/";
+const BASE_URL = "https://zsolts-news.onrender.com/api/";
 
 export const fetchArticles = async (options: Options) => {
   try {

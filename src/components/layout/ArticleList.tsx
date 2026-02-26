@@ -9,7 +9,7 @@ export function ArticleList({
   presetFilters: Array<Object>;
   disableListControls: boolean;
 }) {
-  const { content, error, loading } = useGetContent(fetchArticles, {
+  const { content, loading } = useGetContent(fetchArticles, {
     queryParams: { limit: 100 },
   });
 

@@ -48,7 +48,7 @@ export function ListItem({
             to={"/articles/" + article?.article_id}
           >
             <img
-              className="self-end h-52 w-full rounded-t-xl mb-1 group-hover:brightness-120 transition-all"
+              className="self-end h-52 w-full object-cover rounded-t-xl mb-1 group-hover:brightness-120 transition-all"
               src={article?.article_img_url}
               onLoad={() => {
                 setImgLoading(false);
