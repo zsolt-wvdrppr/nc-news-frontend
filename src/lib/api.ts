@@ -3,11 +3,8 @@ import type { Article, Comment } from "./types";
 const BASE_URL = "https://zsolts-news.onrender.com/api/";
 
 export const fetchArticles = async (
-  articles: Array<Object>,
-  setArticles: (articles: Article[]) => void,
-  setLoading: (loading: boolean) => void,
-  setTotalCount: (totalCount: number) => void,
   queryParams: Object,
+  setError: (error: Object) => void,
 ) => {
   const getQueryParams = (queryParams: Object) => {
     if (!queryParams) return "";
@@ -20,22 +17,17 @@ export const fetchArticles = async (
   };
 
   try {
-    setLoading(true);
     const urlToFetch = BASE_URL + "articles" + getQueryParams(queryParams);
     console.log("Fetching", urlToFetch);
     const response = await fetch(urlToFetch);
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
     const result = await response.json();
-    const updatedArticles =
-      articles ? articles.concat(result.articles) : result.articles;
 
-    setArticles(updatedArticles);
-    setTotalCount(result.total_count);
     console.log(result.total_count);
+
+    return result;
   } catch (err) {
-    console.log(err);
-  } finally {
-    setLoading(false);
+    if (err) setError(err);
   }
 };
 

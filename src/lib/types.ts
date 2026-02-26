@@ -22,3 +22,13 @@ export interface Page {
   title: string;
   path: string;
 }
+
+export interface Options {
+  limit: number;
+}
+
+export interface Content {
+  articles?: Article[];
+  comments?: Comment[];
+  total_count: number;
+}
