@@ -35,6 +35,7 @@ export interface Options {
   body?: Object;
   url?: string;
   baseUrl?: string;
+  method?: string;
 }
 
 export interface Content {

@@ -1,7 +1,7 @@
 import { ThumbsUp } from "lucide-react";
 import { useState, type ComponentPropsWithoutRef } from "react";
 import { useContent } from "../../lib/hooks/useContent";
-import { patchVote } from "../../lib/api";
+import { fetchContent } from "../../lib/api";
 import type { Options } from "../../lib/types";
 
 export function VoteBar({
@@ -14,16 +14,18 @@ export function VoteBar({
 } & ComponentPropsWithoutRef<"div">) {
   const [votes, setVotes] = useState(initialVotes);
 
-  const { setTrigger } = useContent(patchVote, options, "trigger");
+  const { setTrigger } = useContent(fetchContent, options, "trigger");
 
   const handleUpVote = () => {
     options.body = { inc_votes: 1 };
+    options.method = "PATCH";
     setTrigger(true);
     setVotes(votes + 1);
   };
 
   const handleDownVote = () => {
     options.body = { inc_votes: -1 };
+    options.method = "PATCH";
     setTrigger(true);
     setVotes(votes - 1);
   };
