@@ -21,6 +21,7 @@ export function SingleArticle({}) {
     {
       articleId: articleId,
       url: ":baseUrl/articles/:article_id/comments",
+      queryParams: { limit: 100 },
     },
   );
 

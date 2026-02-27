@@ -43,6 +43,10 @@ export function CommentsSection({
               </span>
               <VoteBar
                 votes={Number(comment.votes)}
+                options={{
+                  commentId: comment.comment_id,
+                  url: ":baseUrl/comments/:comment_id",
+                }}
                 className="mt-3 text-c-burntpeach flex flex-row items-center justify-end gap-x-6"
               />
             </li>
