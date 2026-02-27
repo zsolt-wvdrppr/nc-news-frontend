@@ -65,10 +65,10 @@ export const buildURL = (options: Options) => {
 
   let completeUrl = options.url;
   placeholders.forEach((placeholder) => {
-    completeUrl = completeUrl.replace(
-      placeholder,
-      urlFragments[placeholder as keyof typeof urlFragments],
-    );
+    const urlFragment = urlFragments[placeholder as keyof typeof urlFragments];
+    if (!urlFragment)
+      throw new Error(`Process failed, because ${placeholder} is missing!`);
+    completeUrl = completeUrl.replace(placeholder, urlFragment);
   });
 
   if (options.queryParams) {
