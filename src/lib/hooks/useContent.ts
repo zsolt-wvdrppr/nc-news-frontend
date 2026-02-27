@@ -2,16 +2,20 @@ import { useEffect, useState, useContext } from "react";
 import ErrorContext from "../contexts/ErrorContext";
 import type { Options, Content } from "../types";
 
-export const useGetContent = (
-  fetchFunction: (queryParams: Object) => Promise<Content>,
+export const useContent = (
+  fetchFunction: (options: Options) => Promise<Content>,
   options: Options,
+  mode?: string,
 ) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
   const [content, setContent] = useState<Content>();
+  const [trigger, setTrigger] = useState<boolean>(false);
   const { setGlobalError } = useContext(ErrorContext);
 
   useEffect(() => {
+    if (mode === "trigger" && !trigger) return;
+    console.log(options);
     const fetchContent = async () => {
       try {
         setLoading(true);
@@ -25,11 +29,12 @@ export const useGetContent = (
           if (setGlobalError) setGlobalError(err);
         }
       } finally {
+        if (mode === "trigger") setTrigger(false);
         setLoading(false);
       }
     };
     fetchContent();
-  }, [fetchFunction]);
+  }, [fetchFunction, trigger]);
 
-  return { content, error, loading };
+  return { content, error, loading, setTrigger };
 };
