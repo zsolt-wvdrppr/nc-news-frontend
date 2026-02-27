@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { preload } from "react-dom";
 import { Link } from "react-router";
-import type { Article } from "../../lib/types";
-import { formatDate } from "../../lib/utils";
+import type { Article } from "../../../lib/types";
+import { formatDate } from "../../../lib/utils";
 import { Eye } from "lucide-react";
-import VoteBar from "./VoteBar";
+import VoteBar from "../VoteBar";
 
 export function ListItem({
   article,

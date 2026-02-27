@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
-import ArticleList from "./ArticleList";
-import SingleArticle from "./SingleArticle";
+import ArticleList from "./article/ArticleList";
+import SingleArticle from "./article/SingleArticle";
 import NotFound from "./NotFound";
 import ErrorDisplay from "../ErrorDisplay";
 import { useContext } from "react";

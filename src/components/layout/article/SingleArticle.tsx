@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import { formatDate } from "../../lib/utils";
-import { fetchContent } from "../../lib/api";
-import { useContent } from "../../lib/hooks/useContent";
-import VoteBar from "./VoteBar";
-import { CommentsSection } from "./CommentsSection";
+import { formatDate } from "../../../lib/utils";
+import { fetchContent } from "../../../lib/api";
+import { useContent } from "../../../lib/hooks/useContent";
+import VoteBar from "../VoteBar";
+import { CommentsSection } from "../comment/CommentsSection";
 
 export function SingleArticle({}) {
   const { articleId } = useParams();

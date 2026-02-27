@@ -1,7 +1,7 @@
 import { Loader } from "lucide-react";
-import type { Comment } from "../../lib/types";
-import { formatDate } from "../../lib/utils";
-import VoteBar from "./VoteBar";
+import type { Comment } from "../../../lib/types";
+import { formatDate } from "../../../lib/utils";
+import VoteBar from "../VoteBar";
 
 export function CommentsSection({
   comments,
