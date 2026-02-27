@@ -1,15 +1,15 @@
 import { useEffect, useState, useContext } from "react";
 import ErrorContext from "../contexts/ErrorContext";
-import type { Options, Content } from "../types";
+import type { Options, ContentResponse } from "../types";
 
 export const useContent = (
-  fetchFunction: (options: Options) => Promise<Content>,
+  fetchFunction: (options: Options) => Promise<ContentResponse>,
   options: Options,
   mode?: string,
 ) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
-  const [content, setContent] = useState<Content>();
+  const [content, setContent] = useState<ContentResponse>();
   const [trigger, setTrigger] = useState<boolean>(false);
   const { setGlobalError } = useContext(ErrorContext);
 
@@ -19,7 +19,8 @@ export const useContent = (
       try {
         setLoading(true);
         const response = await fetchFunction(options);
-        if (response.error) throw new Error(`${response.error.message}`);
+        if (response.type === "error")
+          throw new Error(`${response.error.message}`);
         setContent(response);
       } catch (err) {
         if (err && err instanceof Error) {

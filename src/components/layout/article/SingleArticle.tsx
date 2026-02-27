@@ -14,25 +14,18 @@ export function SingleArticle({}) {
   const { content, error, loading } = useContent(fetchContent, {
     articleId: articleId,
     url: ":baseUrl/articles/:article_id",
+    expectedType: "article",
   });
 
-  const { content: commentsContent, loading: commentsLoading } = useContent(
-    fetchContent,
-    {
-      articleId: articleId,
-      url: ":baseUrl/articles/:article_id/comments",
-      queryParams: { limit: 100 },
-    },
-  );
+  if (content?.type !== "article") return;
 
-  if (!content?.article) return;
   if (error) return <p>{error.message}</p>;
 
   const { article } = content;
 
   return (
     <div className="max-w-250 p-8 mx-auto flex flex-col gap-10">
-      <h1 className="text-c-jetblack">{article?.title}</h1>
+      <h1 className="text-c-jetblack">{article.title}</h1>
       {(loading || imgLoading) && (
         <div className="h-52 md:h-102 bg-c-powderblue/90 rounded-2xl animate-pulse" />
       )}
@@ -41,17 +34,17 @@ export function SingleArticle({}) {
       >
         <img
           className="h-50 md:h-100 w-full object-cover rounded-2xl"
-          src={article?.article_img_url}
+          src={article.article_img_url}
           onLoad={() => {
             setImgLoading(false);
           }}
         />
       </div>
       <div className="flex flex-row justify-between">
-        <span>{formatDate(article?.created_at || "")}</span>
-        <span>@{article?.author || ""}</span>
+        <span>{formatDate(article.created_at || "")}</span>
+        <span>@{article.author || ""}</span>
       </div>
-      <p>{article?.body}</p>
+      <p>{article.body}</p>
       {article && (
         <VoteBar
           votes={Number(article.votes)}
@@ -63,13 +56,7 @@ export function SingleArticle({}) {
         />
       )}
       <div className="border-b border-c-jetblack/50" />
-      {commentsContent?.comments && articleId && (
-        <CommentsSection
-          comments={commentsContent.comments}
-          articleId={articleId}
-          loading={commentsLoading}
-        />
-      )}
+      {articleId && <CommentsSection articleId={articleId} />}
     </div>
   );
 }

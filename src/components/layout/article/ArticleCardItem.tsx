@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { preload } from "react-dom";
 import { Link } from "react-router";
-import type { Article } from "../../../lib/types";
+import type { ArticleData } from "../../../lib/types";
 import { formatDate } from "../../../lib/utils";
 import { Eye } from "lucide-react";
 import VoteBar from "../VoteBar";
 
-export function ListItem({
+export function ArticleCardItem({
   article,
   loading = true,
 }: {
-  article: Article;
+  article: ArticleData;
   loading: boolean;
 }) {
   preload(article?.article_img_url, {
@@ -19,13 +19,14 @@ export function ListItem({
   });
 
   const [imgLoading, setImgLoading] = useState<boolean>(true);
+  const isAllLoaded = !loading && !imgLoading;
 
   return (
     <div
       key={article.article_id}
       className="article-card flex flex-col justify-between gap-1 h-full"
     >
-      {!loading && !imgLoading ?
+      {isAllLoaded ?
         <Link
           className="group relative block"
           to={"/articles/" + article?.article_id}
@@ -41,7 +42,7 @@ export function ListItem({
       }
       <div className="flex flex-col gap-3">
         <div
-          className={`${(loading || imgLoading) && "hidden"} relative pb-2 bg-c-burntpeach text-right rounded-xl`}
+          className={`${!isAllLoaded && "hidden"} relative pb-2 bg-c-burntpeach text-right rounded-xl`}
         >
           <Link
             className="group relative block"
@@ -66,10 +67,10 @@ export function ListItem({
             />
           </div>
         </div>
-        {(loading || imgLoading) && (
+        {!isAllLoaded && (
           <div className="h-61 bg-c-powderblue/90 rounded-2xl animate-pulse" />
         )}
-        {!loading && !imgLoading ?
+        {isAllLoaded ?
           <div className="flex justify-between items-center">
             <span className="topic px-3 pt-1 pb-1.5 rounded-2xl bg-c-duskblue text-white w-fit">
               {article?.topic}
@@ -82,4 +83,4 @@ export function ListItem({
   );
 }
 
-export default ListItem;
+export default ArticleCardItem;

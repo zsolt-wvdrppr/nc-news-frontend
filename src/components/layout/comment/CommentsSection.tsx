@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useContent } from "../../../lib/hooks/useContent";
+import { fetchContent } from "../../../lib/api";
 import { Loader } from "lucide-react";
-import type { Comment } from "../../../lib/types";
+import type { CommentData } from "../../../lib/types";
 import { formatDate } from "../../../lib/utils";
 import VoteBar from "../VoteBar";
 import CommentForm from "./CommentForm";
 
-export function CommentsSection({
-  comments: initialComments,
-  articleId,
-  loading,
-}: {
-  comments: Array<Comment>;
-  articleId: string;
-  loading: boolean;
-}) {
-  const [comments, setComments] = useState<Array<Comment>>(initialComments);
+export function CommentsSection({ articleId }: { articleId: string }) {
+  const { content, loading } = useContent(fetchContent, {
+    articleId: articleId,
+    url: ":baseUrl/articles/:article_id/comments",
+    queryParams: { limit: 100 },
+    expectedType: "comment-list",
+  });
+
+  const [comments, setComments] = useState<Array<CommentData>>();
+
+  useEffect(() => {
+    if (!loading && content?.type === "comment-list") {
+      setComments(content.comments);
+    }
+  }, [content]);
 
   if (loading)
     return (
@@ -29,7 +36,7 @@ export function CommentsSection({
   return (
     <>
       <ul>
-        {comments.map((comment) => {
+        {comments?.map((comment: CommentData) => {
           return (
             <li
               key={comment.comment_id}
@@ -59,11 +66,13 @@ export function CommentsSection({
           );
         })}
       </ul>
-      <CommentForm
-        articleId={articleId}
-        setComments={setComments}
-        comments={comments}
-      />
+      {comments && (
+        <CommentForm
+          articleId={articleId}
+          setComments={setComments}
+          comments={comments}
+        />
+      )}
     </>
   );
 }

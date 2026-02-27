@@ -1,4 +1,4 @@
-export interface Article {
+export interface ArticleData {
   article_id: number;
   title: string;
   topic: string;
@@ -7,9 +7,21 @@ export interface Article {
   created_at: string;
   article_img_url: string;
   votes: number;
+  error: Error;
 }
 
-export interface Comment {
+export interface Article {
+  type: "article";
+  article: ArticleData;
+}
+
+export interface ArticleList {
+  type: "article-list";
+  articles: ArticleData[];
+  total_count: number;
+}
+
+export interface CommentData {
   comment_id: number;
   article_id: number;
   body: string;
@@ -18,7 +30,19 @@ export interface Comment {
   created_at: string;
 }
 
+export interface Comment {
+  type: "comment";
+  comment: CommentData;
+}
+
+export interface CommentList {
+  type: "comment-list";
+  comments: CommentData[];
+  total_count: number;
+}
+
 export interface Page {
+  type: "page";
   title: string;
   path: string;
 }
@@ -36,13 +60,23 @@ export interface Options {
   url?: string;
   baseUrl?: string;
   method?: string;
+  expectedType?: "article-list" | "article" | "comment" | "comment-list";
 }
 
-export interface Content {
-  articles?: Article[];
-  article?: Article;
-  comments?: Comment[];
-  comment?: Comment;
-  total_count?: number;
-  error?: Error;
+export interface TotalCount {
+  type: "total-count";
+  total_count: number;
 }
+
+export interface ErrorType extends Error {
+  type: "error";
+  error: { message: string };
+}
+
+export type ContentResponse =
+  | Article
+  | ArticleList
+  | Comment
+  | CommentList
+  | TotalCount
+  | ErrorType;

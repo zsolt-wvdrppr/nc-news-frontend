@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
-import type { Content, Comment } from "../types";
+import type { ContentResponse, CommentData } from "../types";
 
 export const usePushComment = (
-  content: Content | undefined,
-  comments: Comment[],
-  setComments: (comments: Comment[]) => void,
-  comment: string,
-  setComment: (comment: string) => void,
+  content: ContentResponse | undefined,
+  comments: CommentData[],
+  setComments: (comments: CommentData[]) => void,
+  userInput: string,
 ) => {
   const [commentPosted, setCommentPosted] = useState<boolean>(false);
 
   // Add comment to comments once returned by api
   useEffect(() => {
+    if (content?.type !== "comment") return;
     const newCommentId = content?.comment?.comment_id;
     if (newCommentId) {
       let hasComment =
-        comments.filter((comment) => comment.comment_id === newCommentId)
-          .length > 0;
+        comments.filter(
+          (comment: CommentData) => comment.comment_id === newCommentId,
+        ).length > 0;
       if (!hasComment && content.comment) {
         setComments(comments.concat([content.comment]));
         setCommentPosted(true);
@@ -24,5 +25,5 @@ export const usePushComment = (
     }
   }, [content]);
 
-  return { comment, setComment, commentPosted, setCommentPosted };
+  return { userInput, commentPosted, setCommentPosted };
 };

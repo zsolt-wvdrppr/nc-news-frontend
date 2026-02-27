@@ -8,6 +8,8 @@ export const fetchContent = async (options: Options) => {
   const headers = { "Content-Type": "application/json" };
 
   try {
+    if (options.expectedType === undefined)
+      throw new Error(`Missing expected type!`);
     if (options.method && options.method !== "GET") {
       if (!options.url) throw new Error(`Missing url!`);
       if (!options.body) throw new Error(`Missing request body!`);
@@ -22,8 +24,10 @@ export const fetchContent = async (options: Options) => {
         });
     if (!response.ok)
       throw new Error(`Fetching failed! Response status: ${response.status}`);
-    return response.json();
+    const result = await response.json();
+    console.log("result", { type: options.expectedType, ...result });
+    return { type: options.expectedType, ...result };
   } catch (err) {
-    if (err) return { error: err };
+    if (err) return { type: "error", error: err };
   }
 };

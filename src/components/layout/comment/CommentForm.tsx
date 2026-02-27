@@ -1,4 +1,4 @@
-import type { Comment } from "../../../lib/types";
+import type { CommentData } from "../../../lib/types";
 import { useState } from "react";
 import { fetchContent } from "../../../lib/api";
 import { useContent } from "../../../lib/hooks/useContent";
@@ -11,19 +11,20 @@ export function CommentForm({
   setComments,
 }: {
   articleId: string;
-  comments: Comment[];
-  setComments: (comments: Comment[]) => void;
+  comments: Array<CommentData>;
+  setComments: (comments: CommentData[]) => void;
 }) {
-  const [comment, setComment] = useState<string>("");
+  const [localUserInput, setLocalUserInput] = useState<string>("");
   const username = "jessjelly";
 
   const { content, loading, setTrigger, error } = useContent(
     fetchContent,
     {
-      url: ":baseUrl/articles/:article_id/comments",
-      body: { username: username, body: comment }, // Hardcoded user for development
+      url: ":baseUrl/articles/:article_id/comment",
+      body: { username: username, body: localUserInput }, // Hardcoded user for development
       method: "POST",
       articleId: articleId,
+      expectedType: "comment",
     },
     "trigger",
   );
@@ -32,14 +33,13 @@ export function CommentForm({
     content,
     comments,
     setComments,
-    comment,
-    setComment,
+    localUserInput,
   );
 
   const handleSubmit = (formData: FormData) => {
-    const comment = formData.get("comment-input")?.toString();
-    if (!comment) return;
-    setComment(comment);
+    const userInput = formData.get("comment-input")?.toString();
+    if (!userInput) return;
+    setLocalUserInput(userInput);
     setTrigger(true);
   };
 
