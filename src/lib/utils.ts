@@ -31,6 +31,7 @@ export const formatDate = (dateStr: string) => {
   const date = new Date(dateStr);
   const output = `
   ${dayLookup[date.getDay()]},
+  ${date.getDate()}.
   ${monthLookup[date.getMonth()]}. 
   ${date.getFullYear()}.`;
 
