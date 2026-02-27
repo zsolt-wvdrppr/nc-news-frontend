@@ -1,15 +1,21 @@
+import { useState } from "react";
 import { Loader } from "lucide-react";
 import type { Comment } from "../../../lib/types";
 import { formatDate } from "../../../lib/utils";
 import VoteBar from "../VoteBar";
+import CommentForm from "./CommentForm";
 
 export function CommentsSection({
-  comments,
+  comments: initialComments,
+  articleId,
   loading,
 }: {
   comments: Array<Comment>;
+  articleId: string;
   loading: boolean;
 }) {
+  const [comments, setComments] = useState<Array<Comment>>(initialComments);
+
   if (loading)
     return (
       <div className="flex flex-col items-center gap-3">
@@ -53,6 +59,11 @@ export function CommentsSection({
           );
         })}
       </ul>
+      <CommentForm
+        articleId={articleId}
+        setComments={setComments}
+        comments={comments}
+      />
     </>
   );
 }

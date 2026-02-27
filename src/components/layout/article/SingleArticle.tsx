@@ -63,9 +63,10 @@ export function SingleArticle({}) {
         />
       )}
       <div className="border-b border-c-jetblack/50" />
-      {commentsContent?.comments && (
+      {commentsContent?.comments && articleId && (
         <CommentsSection
           comments={commentsContent.comments}
+          articleId={articleId}
           loading={commentsLoading}
         />
       )}

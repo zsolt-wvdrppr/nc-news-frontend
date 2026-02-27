@@ -2,13 +2,7 @@ import ListItem from "./ListItem";
 import { fetchContent } from "../../../lib/api";
 import { useContent } from "../../../lib/hooks/useContent";
 
-export function ArticleList({
-  presetFilters = [], // reserved for future feature
-  disableListControls = false, // reserved for future feature
-}: {
-  presetFilters: Array<Object>;
-  disableListControls: boolean;
-}) {
+export function ArticleList({}: {}) {
   const { content, loading } = useContent(fetchContent, {
     queryParams: { limit: 100 },
     url: ":baseUrl/articles",
