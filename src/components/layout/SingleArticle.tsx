@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { formatDate } from "../../lib/utils";
-import { fetchArticleById, fetchCommentsByArticleId } from "../../lib/api";
+import { fetchContent } from "../../lib/api";
 import { useContent } from "../../lib/hooks/useContent";
 import VoteBar from "./VoteBar";
 import { CommentsSection } from "./CommentsSection";
@@ -11,14 +11,16 @@ export function SingleArticle({}) {
 
   const [imgLoading, setImgLoading] = useState<boolean>(true);
 
-  const { content, error, loading } = useContent(fetchArticleById, {
+  const { content, error, loading } = useContent(fetchContent, {
     articleId: articleId,
+    url: ":baseUrl/articles/:article_id",
   });
 
   const { content: commentsContent, loading: commentsLoading } = useContent(
-    fetchCommentsByArticleId,
+    fetchContent,
     {
       articleId: articleId,
+      url: ":baseUrl/articles/:article_id/comments",
     },
   );
 

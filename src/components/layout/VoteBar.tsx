@@ -14,11 +14,7 @@ export function VoteBar({
 } & ComponentPropsWithoutRef<"div">) {
   const [votes, setVotes] = useState(initialVotes);
 
-  const { content, loading, setTrigger } = useContent(
-    patchVote,
-    options,
-    "trigger",
-  );
+  const { setTrigger } = useContent(patchVote, options, "trigger");
 
   const handleUpVote = () => {
     options.body = { inc_votes: 1 };

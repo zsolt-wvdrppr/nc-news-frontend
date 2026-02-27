@@ -1,19 +1,18 @@
 import ListItem from "./ListItem";
-import { fetchArticles } from "../../lib/api";
+import { fetchContent } from "../../lib/api";
 import { useContent } from "../../lib/hooks/useContent";
 
 export function ArticleList({
-  presetFilters = [],
-  disableListControls = false,
+  presetFilters = [], // reserved for future feature
+  disableListControls = false, // reserved for future feature
 }: {
   presetFilters: Array<Object>;
   disableListControls: boolean;
 }) {
-  const { content, loading } = useContent(fetchArticles, {
+  const { content, loading } = useContent(fetchContent, {
     queryParams: { limit: 100 },
+    url: ":baseUrl/articles",
   });
-
-  const tempvar = disableListControls && presetFilters;
 
   return (
     <>
