@@ -1,6 +1,6 @@
 import ListItem from "./ListItem";
 import { fetchArticles } from "../../lib/api";
-import { useGetContent } from "../../lib/hooks/useGetContent";
+import { useContent } from "../../lib/hooks/useContent";
 
 export function ArticleList({
   presetFilters = [],
@@ -9,7 +9,7 @@ export function ArticleList({
   presetFilters: Array<Object>;
   disableListControls: boolean;
 }) {
-  const { content, loading } = useGetContent(fetchArticles, {
+  const { content, loading } = useContent(fetchArticles, {
     queryParams: { limit: 100 },
   });
 

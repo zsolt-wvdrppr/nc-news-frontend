@@ -2,24 +2,23 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { formatDate } from "../../lib/utils";
 import { fetchArticleById, fetchCommentsByArticleId } from "../../lib/api";
-import { useGetContent } from "../../lib/hooks/useGetContent";
+import { useContent } from "../../lib/hooks/useContent";
 import VoteBar from "./VoteBar";
 import { CommentsSection } from "./CommentsSection";
 
 export function SingleArticle({}) {
   const { articleId } = useParams();
-  const numArticleId = Number(articleId);
 
   const [imgLoading, setImgLoading] = useState<boolean>(true);
 
-  const { content, error, loading } = useGetContent(fetchArticleById, {
-    articleId: numArticleId,
+  const { content, error, loading } = useContent(fetchArticleById, {
+    articleId: articleId,
   });
 
-  const { content: commentsContent, loading: commentsLoading } = useGetContent(
+  const { content: commentsContent, loading: commentsLoading } = useContent(
     fetchCommentsByArticleId,
     {
-      articleId: numArticleId,
+      articleId: articleId,
     },
   );
 
@@ -55,6 +54,10 @@ export function SingleArticle({}) {
       {article && (
         <VoteBar
           votes={Number(article.votes)}
+          options={{
+            articleId: articleId,
+            url: ":baseUrl/articles/:article_id",
+          }}
           className="flex flex-wrap gap-6"
         />
       )}

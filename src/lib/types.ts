@@ -30,7 +30,11 @@ export interface QueryParams {
 
 export interface Options {
   queryParams?: QueryParams;
-  articleId?: number;
+  articleId?: string;
+  commentId?: number;
+  body?: Object;
+  url?: string;
+  baseUrl?: string;
 }
 
 export interface Content {
