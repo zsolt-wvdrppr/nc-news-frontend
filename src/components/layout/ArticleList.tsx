@@ -1,6 +1,6 @@
 import ListItem from "./ListItem";
 import { fetchArticles } from "../../lib/api";
-import { useGetContent } from "../../lib/hooks/useArticles";
+import { useGetContent } from "../../lib/hooks/useGetContent";
 
 export function ArticleList({
   presetFilters = [],

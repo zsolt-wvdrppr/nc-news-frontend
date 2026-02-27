@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router";
 import { formatDate } from "../../lib/utils";
 import { fetchArticleById, fetchCommentsByArticleId } from "../../lib/api";
-import { useGetContent } from "../../lib/hooks/useArticles";
+import { useGetContent } from "../../lib/hooks/useGetContent";
 import VoteBar from "./VoteBar";
 import { CommentsSection } from "./CommentsSection";
 
