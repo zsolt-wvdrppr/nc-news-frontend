@@ -49,8 +49,11 @@ export const formatQueryParams = (queryParams: QueryParams) => {
 export const buildURL = (options: Options) => {
   const urlFragments = {
     ":baseUrl": options.baseUrl || "",
+    ":base_url": options.baseUrl || "",
     ":article_id": options.articleId?.toString() || "",
+    ":articleId": options.articleId?.toString() || "",
     ":comment_id": options.commentId?.toString() || "",
+    ":commentId": options.commentId?.toString() || "",
   };
 
   const regex = /:(\w+)/gm; // match :placeholders
