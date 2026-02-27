@@ -5,9 +5,12 @@ import { fetchContent } from "../../../lib/api";
 import { useContent } from "../../../lib/hooks/useContent";
 import VoteBar from "../VoteBar";
 import { CommentsSection } from "../comment/CommentsSection";
+import { useScrollToTop } from "../../../lib/hooks/useScrollToTop";
 
 export function SingleArticle({}) {
   const { articleId } = useParams();
+
+  useScrollToTop();
 
   const [imgLoading, setImgLoading] = useState<boolean>(true);
 

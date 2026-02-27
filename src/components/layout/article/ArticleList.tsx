@@ -1,6 +1,7 @@
 import ArticleCardItem from "./ArticleCardItem";
 import { fetchContent } from "../../../lib/api";
 import { useContent } from "../../../lib/hooks/useContent";
+import { useScrollToTop } from "../../../lib/hooks/useScrollToTop";
 
 export function ArticleList({}: {}) {
   const { content, loading } = useContent(fetchContent, {
@@ -8,6 +9,8 @@ export function ArticleList({}: {}) {
     url: ":baseUrl/articles",
     expectedType: "article-list",
   });
+
+  useScrollToTop();
 
   return (
     <>
