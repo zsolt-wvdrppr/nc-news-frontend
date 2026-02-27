@@ -5,7 +5,6 @@ export const usePushComment = (
   content: ContentResponse | undefined,
   comments: CommentData[],
   setComments: (comments: CommentData[]) => void,
-  userInput: string,
 ) => {
   const [commentPosted, setCommentPosted] = useState<boolean>(false);
 
@@ -25,5 +24,5 @@ export const usePushComment = (
     }
   }, [content]);
 
-  return { userInput, commentPosted, setCommentPosted };
+  return { commentPosted, setCommentPosted };
 };

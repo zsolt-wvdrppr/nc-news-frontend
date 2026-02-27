@@ -29,11 +29,11 @@ export function CommentForm({
     "trigger",
   );
 
+  // Push returned comment object (by API) instead of triggering another fetch to refresh comments
   const { commentPosted, setCommentPosted } = usePushComment(
     content,
     comments,
     setComments,
-    localUserInput,
   );
 
   const handleSubmit = (formData: FormData) => {
