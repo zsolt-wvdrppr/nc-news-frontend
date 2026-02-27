@@ -13,7 +13,7 @@ export function ArticleCardItem({
   article: ArticleData;
   loading: boolean;
 }) {
-  preload(article?.article_img_url, {
+  preload(article.article_img_url, {
     as: "image",
     imageSizes: "(max-width: 512px) 512px, 1024px",
   });
@@ -29,10 +29,10 @@ export function ArticleCardItem({
       {isAllLoaded ?
         <Link
           className="group relative block"
-          to={"/articles/" + article?.article_id}
+          to={"/articles/" + article.article_id}
         >
           <h3 className="font-bold text-xl h-full text-c-jetblack">
-            {article?.title}
+            {article.title}
           </h3>
         </Link>
       : <div className="flex flex-col gap-1">
@@ -46,11 +46,11 @@ export function ArticleCardItem({
         >
           <Link
             className="group relative block"
-            to={"/articles/" + article?.article_id}
+            to={`/articles/${article.article_id}#`}
           >
             <img
               className="self-end h-52 w-full object-cover rounded-t-xl mb-1 group-hover:brightness-120 transition-all"
-              src={article?.article_img_url}
+              src={article.article_img_url}
               onLoad={() => {
                 setImgLoading(false);
               }}
@@ -59,7 +59,7 @@ export function ArticleCardItem({
           </Link>
           <div className="flex justify-between px-3">
             <span className="text-white font-semibold">
-              {formatDate(article?.created_at)}
+              {formatDate(article.created_at)}
             </span>
             <VoteBar
               votes={Number(article.votes)}
@@ -75,7 +75,7 @@ export function ArticleCardItem({
             <span className="topic px-3 pt-1 pb-1.5 rounded-2xl bg-c-duskblue text-white w-fit">
               {article?.topic}
             </span>
-            <span>@{article?.author}</span>
+            <span>@{article.author}</span>
           </div>
         : <div className="h-9 bg-c-powderblue/90 rounded-2xl animate-pulse" />}
       </div>

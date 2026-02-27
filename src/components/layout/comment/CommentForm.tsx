@@ -20,7 +20,7 @@ export function CommentForm({
   const { content, loading, setTrigger, error } = useContent(
     fetchContent,
     {
-      url: ":baseUrl/articles/:article_id/comment",
+      url: ":baseUrl/articles/:article_id/comments",
       body: { username: username, body: localUserInput }, // Hardcoded user for development
       method: "POST",
       articleId: articleId,
