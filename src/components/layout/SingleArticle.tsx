@@ -24,8 +24,6 @@ export function SingleArticle({}) {
     },
   );
 
-  console.log(commentsContent);
-
   if (!content?.article) return;
   if (error) return <p>{error.message}</p>;
 

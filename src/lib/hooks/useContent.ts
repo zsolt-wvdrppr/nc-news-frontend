@@ -15,7 +15,6 @@ export const useContent = (
 
   useEffect(() => {
     if (mode === "trigger" && !trigger) return;
-    console.log(options);
     const fetchContent = async () => {
       try {
         setLoading(true);
@@ -25,7 +24,6 @@ export const useContent = (
       } catch (err) {
         if (err && err instanceof Error) {
           setError(err);
-          console.log("errmsg", err.message);
           if (setGlobalError) setGlobalError(err);
         }
       } finally {

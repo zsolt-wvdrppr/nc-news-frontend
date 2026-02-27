@@ -59,7 +59,6 @@ export const buildURL = (options: Options) => {
   const regex = /:(\w+)/gm; // match :placeholders
   if (!options.url) throw new Error(`Missing URL from optons!`);
   const placeholders = options.url.match(regex);
-  console.log("placeholders", placeholders);
 
   if (!placeholders || placeholders?.length === 0) return options.url; // no placeholder found in url string
   if (!options.baseUrl) throw new Error(`Missing request baseUrl!`);
@@ -75,6 +74,6 @@ export const buildURL = (options: Options) => {
   if (options.queryParams) {
     completeUrl += formatQueryParams(options.queryParams);
   }
-  console.log("comp url", completeUrl);
+
   return completeUrl;
 };
