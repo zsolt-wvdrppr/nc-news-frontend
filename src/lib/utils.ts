@@ -69,5 +69,9 @@ export const buildURL = (options: Options) => {
     );
   });
 
+  if (options.queryParams) {
+    completeUrl += formatQueryParams(options.queryParams);
+  }
+  console.log("comp url", completeUrl);
   return completeUrl;
 };

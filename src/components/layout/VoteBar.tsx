@@ -12,8 +12,6 @@ export function VoteBar({
   votes: number;
   options?: Options;
 } & ComponentPropsWithoutRef<"div">) {
-  //console.log("ARTICLE ID", options.articleId);
-
   const [votes, setVotes] = useState(initialVotes);
 
   const { content, loading, setTrigger } = useContent(
