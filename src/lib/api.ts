@@ -25,7 +25,20 @@ export const fetchContent = async (options: Options) => {
     if (!response.ok)
       throw new Error(`Fetching failed! Response status: ${response.status}`);
     const result = await response.json();
-    console.log("result", { type: options.expectedType, ...result });
+
+    // Validate the response matches expectedType
+    if (options.expectedType === "article" && !result.article) {
+      throw new Error(
+        "Expected single article but got different data structure",
+      );
+    }
+    if (options.expectedType === "article-list" && !result.articles) {
+      throw new Error("Expected article list but got different data structure");
+    }
+    if (options.expectedType === "comment-list" && !result.comments) {
+      throw new Error("Expected comment list but got different data structure");
+    }
+
     return { type: options.expectedType, ...result };
   } catch (err) {
     if (err) return { type: "error", error: err };
