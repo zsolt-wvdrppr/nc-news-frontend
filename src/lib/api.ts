@@ -1,3 +1,4 @@
+import { AppError } from "./errors";
 import type { Options } from "./types";
 import { buildURL } from "./utils";
 
@@ -9,10 +10,10 @@ export const fetchContent = async (options: Options) => {
   const headers = { "Content-Type": "application/json" };
 
   if (options.expectedType === undefined)
-    throw new Error(`Missing expected type!`);
+    throw new AppError(`Missing expected type!`);
   if (options.method && options.method !== "GET") {
-    if (!options.url) throw new Error(`Missing url!`);
-    if (!options.body) throw new Error(`Missing request body!`);
+    if (!options.url) throw new AppError(`Missing url!`);
+    if (!options.body) throw new AppError(`Missing request body!`);
   }
   const response =
     !options.method ?
@@ -22,8 +23,9 @@ export const fetchContent = async (options: Options) => {
         headers,
         body: JSON.stringify(options.body),
       });
-  if (!response.ok)
-    throw new Error(`Fetching failed! Response status: ${response.status}`);
+  if (!response.ok) {
+    throw new AppError("Fetching failed!", response.status);
+  }
   const result = await response.json();
 
   return { type: options.expectedType, ...result };
@@ -35,9 +37,9 @@ export const fetchUser = async (options: Options) => {
   const headers = { "Content-Type": "application/json" };
 
   if (options.expectedType !== "user")
-    throw new Error("Incorrect expected type!");
+    throw new AppError("Incorrect expected type!");
 
-  if (!options.url) throw new Error(`Missing url!`);
+  if (!options.url) throw new AppError(`Missing url!`);
   const response =
     !options.method ?
       await fetch(buildURL(options))
@@ -48,8 +50,8 @@ export const fetchUser = async (options: Options) => {
       });
 
   if (!response.ok) {
-    if (response.status === 404) throw new Error("User not found!");
-    throw new Error(
+    if (response.status === 404) throw new AppError("User not found!");
+    throw new AppError(
       `Fetching user failed! Response status: ${response.status}`,
     );
   }
@@ -62,7 +64,7 @@ export const deleteContent = async (options: Options) => {
   options.baseUrl = BASE_URL;
   const headers = { "Content-Type": "application/json" };
 
-  if (!options.url) throw new Error(`Missing url!`);
+  if (!options.url) throw new AppError(`Missing url!`);
 
   const response = await fetch(buildURL(options), {
     method: "DELETE",
@@ -70,7 +72,7 @@ export const deleteContent = async (options: Options) => {
   });
 
   if (!response.ok)
-    throw new Error(`Deletion failed! Response status: ${response.status}`);
+    throw new AppError(`Deletion failed! Response status: ${response.status}`);
 
   return { type: "status", status: response.status };
 };

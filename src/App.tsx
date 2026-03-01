@@ -5,9 +5,10 @@ import { useState } from "react";
 import ErrorContext from "./lib/contexts/ErrorContext";
 import { UserContext } from "./lib/contexts/UserContext";
 import type { UserType } from "./lib/types";
+import type { AppError } from "./lib/errors";
 
 function App() {
-  const [globalError, setGlobalError] = useState<Error>();
+  const [globalError, setGlobalError] = useState<AppError | null>(null);
   const [user, setUser] = useState<UserType | null>(null);
 
   return (

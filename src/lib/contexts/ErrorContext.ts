@@ -1,12 +1,13 @@
 import { createContext } from "react";
+import { AppError } from "../errors";
 
 export interface ErrorContextType {
-  globalError?: Error;
-  setGlobalError?: (globalError: Error) => void;
+  globalError: AppError | null;
+  setGlobalError: (globalError: AppError) => void;
 }
 
 const ErrorContext = createContext<ErrorContextType>({
-  globalError: new Error(),
+  globalError: new AppError(""),
   setGlobalError: () => {},
 });
 

@@ -19,6 +19,8 @@ export function Layout({}: {}) {
         <Route path="/articles/:articleId" element={<SingleArticle />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/topics/:topic" element={<ArticleList />} />
+        <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

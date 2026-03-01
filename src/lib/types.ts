@@ -74,18 +74,12 @@ export interface TotalCount {
   total_count: number;
 }
 
-export interface ErrorType extends Error {
-  type: "error";
-  error: { message: string };
-}
-
 export type ContentResponse =
   | Article
   | ArticleList
   | Comment
   | CommentList
-  | TotalCount
-  | ErrorType;
+  | TotalCount;
 
 export interface UserType {
   type: "user";
