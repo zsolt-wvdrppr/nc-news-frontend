@@ -24,10 +24,9 @@ export const useContent = (
         validateResponseType(response);
         setContent(response);
       } catch (err) {
-        if (err && err instanceof Error) {
-          setError(err);
-          if (setGlobalError) setGlobalError(err);
-        }
+        const error = err instanceof Error ? err : new Error(String(err));
+        setError(error);
+        if (setGlobalError) setGlobalError(error);
       } finally {
         if (mode === "trigger") setTrigger(false);
         setLoading(false);
