@@ -20,7 +20,7 @@ export function UserDisplay({}) {
           <div className="user-avatar bg-c-burntpeach size-13 rounded-full flex items-center justify-center">
             {user.avatar_url && (
               <>
-                <div className="image-container p-1 bg-white rounded-full size-11 flex items-center justify-center">
+                <div className="image-container p-1 bg-white rounded-full size-11 flex items-center justify-center overflow-hidden">
                   <img
                     src={user.avatar_url}
                     className={`${imgLoading && "hidden"} object-contain`}
