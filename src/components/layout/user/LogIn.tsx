@@ -1,12 +1,16 @@
-import { KeyRound, LogOut, User } from "lucide-react";
-import { Link } from "react-router";
+import { KeyRound, LogOut } from "lucide-react";
+import { Link, useLocation } from "react-router";
 import { useContext } from "react";
+import { useScrollToTop } from "../../../lib/hooks/useScrollToTop";
 import UserContext from "../../../lib/contexts/UserContext";
 import { useUser } from "../../../lib/hooks/useUser";
 
 export function LogIn({}) {
   const { validateUser, logOut } = useUser();
   const { user } = useContext(UserContext);
+  useScrollToTop();
+  const { pathname } = useLocation();
+  console.log(pathname);
 
   const handleLogin = (formData: FormData) => {
     const username = formData.get("username");
@@ -17,7 +21,9 @@ export function LogIn({}) {
   if (user) {
     return (
       <div className="flex flex-col gap-6">
-        <h1 className="text-c-duskblue mx-auto w-fit">Login page</h1>
+        {pathname === "/login" && (
+          <h1 className="text-c-duskblue mx-auto w-fit">Login page</h1>
+        )}
         <p className="text-c-duskblue mx-auto w-fit">
           {`You're currently logged in as `}
           <span className="font-semibold">{user.username}</span>
@@ -35,7 +41,9 @@ export function LogIn({}) {
 
   return (
     <div>
-      <h1 className="text-c-duskblue mx-auto w-fit">Login page</h1>
+      {pathname === "/login" && (
+        <h1 className="text-c-duskblue mx-auto w-fit">Login page</h1>
+      )}
 
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
