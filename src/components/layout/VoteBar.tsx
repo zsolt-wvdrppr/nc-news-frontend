@@ -35,13 +35,13 @@ export function VoteBar({
   return (
     <div {...props}>
       <button aria-label="down-vote" onClick={handleDownVote}>
-        <ThumbsUp className="rotate-180 hover:scale-125 hover:stroke-1.5 transition-all cursor-pointer" />
+        <ThumbsUp className="rotate-180 active:scale-150 active:opacity-50 hover:scale-125 hover:stroke-1.5 transition-all cursor-pointer" />
       </button>
       <span className=" font-bold">{votes}</span>
       <button>
         <ThumbsUp
           aria-label="up-vote"
-          className="hover:scale-125 transition-all hover:stroke-1.5 cursor-pointer"
+          className="hover:scale-125 active:scale-150 active:opacity-50 transition-all hover:stroke-1.5 cursor-pointer"
           onClick={handleUpVote}
         />
       </button>
