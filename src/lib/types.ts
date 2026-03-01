@@ -56,11 +56,17 @@ export interface Options {
   queryParams?: QueryParams;
   articleId?: string;
   commentId?: number;
+  username?: string;
   body?: Object;
   url?: string;
   baseUrl?: string;
   method?: string;
-  expectedType?: "article-list" | "article" | "comment" | "comment-list";
+  expectedType?:
+    | "article-list"
+    | "article"
+    | "comment"
+    | "comment-list"
+    | "user";
 }
 
 export interface TotalCount {
@@ -80,3 +86,10 @@ export type ContentResponse =
   | CommentList
   | TotalCount
   | ErrorType;
+
+export interface UserType {
+  type: "user";
+  name: "string";
+  username: string;
+  avatar_url: string;
+}

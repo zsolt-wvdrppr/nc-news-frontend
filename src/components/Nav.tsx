@@ -1,7 +1,7 @@
 import type { Page } from "../lib/types";
 import { Link, useLocation } from "react-router";
 
-export function Nav({ pages = [] }: { pages: Array<Page> }) {
+export function Nav({ pages }: { pages: Array<Page> }) {
   const location = useLocation();
   const path = location.pathname;
 

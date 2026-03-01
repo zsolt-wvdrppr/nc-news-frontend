@@ -13,7 +13,7 @@ export function Layout({}: {}) {
 
   return (
     <div className="max-w-screen min-h-screen">
-      <ErrorDisplay error={globalError} />
+      {globalError && <ErrorDisplay error={globalError} />}
       <Routes>
         <Route path="/" element={<ArticleList />} />
         <Route path="/articles/:articleId" element={<SingleArticle />} />

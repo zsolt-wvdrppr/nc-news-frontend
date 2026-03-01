@@ -1,9 +1,40 @@
-import { KeyRound } from "lucide-react";
+import { KeyRound, LogOut, User } from "lucide-react";
 import { Link } from "react-router";
+import { useContext } from "react";
+import UserContext from "../../../lib/contexts/UserContext";
+import { useUser } from "../../../lib/hooks/useUser";
 
 export function LogIn({}) {
+  const { validateUser, logOut } = useUser();
+  const { user } = useContext(UserContext);
+
+  const handleLogin = (formData: FormData) => {
+    const username = formData.get("username");
+    if (!username) return;
+    validateUser(username.toString());
+  };
+
+  if (user) {
+    return (
+      <div className="flex flex-col gap-6">
+        <h1 className="text-c-duskblue mx-auto w-fit">Login page</h1>
+        <p className="text-c-duskblue mx-auto w-fit">
+          {`You're currently logged in as `}
+          <span className="font-semibold">{user.username}</span>
+          {"."}
+        </p>
+        <button
+          className="flex w-fit mx-auto gap-2 justify-center rounded-md bg-c-duskblue px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-c-duskblue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-c-duskblue"
+          onClick={logOut}
+        >
+          <LogOut className="size-6" /> Log out
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="mt-32">
+    <div>
       <h1 className="text-c-duskblue mx-auto w-fit">Login page</h1>
 
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -15,7 +46,7 @@ export function LogIn({}) {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form action={handleLogin} className="space-y-6">
             <div>
               <label
                 htmlFor="email"

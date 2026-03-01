@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export function SignUp({}) {
   return (
-    <div className="mt-32">
+    <div>
       <h1 className="text-c-duskblue mx-auto w-fit">Signup page</h1>
 
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">

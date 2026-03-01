@@ -44,3 +44,38 @@ export const fetchContent = async (options: Options) => {
     if (err) return { type: "error", error: err };
   }
 };
+
+export const fetchUser = async (options: Options) => {
+  options.baseUrl = BASE_URL;
+  const headers = { "Content-Type": "application/json" };
+
+  try {
+    if (options.expectedType !== "user")
+      throw new Error("Incorrect expected type!");
+
+    if (!options.url) throw new Error(`Missing url!`);
+    const response =
+      !options.method ?
+        await fetch(buildURL(options))
+      : await fetch(buildURL(options), {
+          method: options.method,
+          headers,
+          body: JSON.stringify(options.body),
+        });
+
+    console.log(response);
+    if (!response.ok) {
+      if (response.status === 404) throw new Error("User not found!");
+      throw new Error(
+        `Fetching user failed! Response status: ${response.status}`,
+      );
+    }
+    const result = await response.json();
+    if (!result.user)
+      throw new Error("Expected user but got different data structure!");
+
+    return { type: "user", ...result.user };
+  } catch (err) {
+    if (err) return { type: "error", error: err };
+  }
+};

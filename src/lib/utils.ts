@@ -55,6 +55,7 @@ export const buildURL = (options: Options) => {
     ":articleId": options.articleId?.toString() || "",
     ":comment_id": options.commentId?.toString() || "",
     ":commentId": options.commentId?.toString() || "",
+    ":username": options.username?.toString() || "",
   };
 
   const regex = /:(\w+)/gm; // match :placeholders
