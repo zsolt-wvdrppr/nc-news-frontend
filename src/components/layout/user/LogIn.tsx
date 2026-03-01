@@ -10,7 +10,6 @@ export function LogIn({}) {
   const { user } = useContext(UserContext);
   useScrollToTop();
   const { pathname } = useLocation();
-  console.log(pathname);
 
   const handleLogin = (formData: FormData) => {
     const username = formData.get("username");

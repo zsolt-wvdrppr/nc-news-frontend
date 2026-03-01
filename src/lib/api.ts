@@ -57,3 +57,20 @@ export const fetchUser = async (options: Options) => {
 
   return { type: "user", ...result.user };
 };
+
+export const deleteContent = async (options: Options) => {
+  options.baseUrl = BASE_URL;
+  const headers = { "Content-Type": "application/json" };
+
+  if (!options.url) throw new Error(`Missing url!`);
+
+  const response = await fetch(buildURL(options), {
+    method: "DELETE",
+    headers,
+  });
+
+  if (!response.ok)
+    throw new Error(`Deletion failed! Response status: ${response.status}`);
+
+  return { type: "status", status: response.status };
+};

@@ -6,6 +6,7 @@ import type { CommentData } from "../../../lib/types";
 import { formatDate } from "../../../lib/utils";
 import VoteBar from "../VoteBar";
 import CommentForm from "./CommentForm";
+import DeleteCommentBtn from "./DeleteCommentBtn";
 
 export function CommentsSection({ articleId }: { articleId: string }) {
   const { content, loading } = useContent(fetchContent, {
@@ -46,6 +47,12 @@ export function CommentsSection({ articleId }: { articleId: string }) {
                 <button className="hover:scale-105 transition-all cursor-pointer bg-c-burntpeach px-2 pb-1 -ml-1 rounded-br-sm font-semibold text-white">
                   <span>@{comment.author}</span>
                 </button>
+                <DeleteCommentBtn
+                  commentId={comment.comment_id}
+                  author={comment.author}
+                  setComments={setComments}
+                  comments={comments}
+                />
                 <span className="hidden sm:block bg-c-burntpeach px-2 pb-1 -mr-1 rounded-bl-sm text-white">
                   {formatDate(comment.created_at)}
                 </span>
