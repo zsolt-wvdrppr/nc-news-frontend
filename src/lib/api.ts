@@ -26,19 +26,6 @@ export const fetchContent = async (options: Options) => {
       throw new Error(`Fetching failed! Response status: ${response.status}`);
     const result = await response.json();
 
-    // Validate the response matches expectedType
-    if (options.expectedType === "article" && !result.article) {
-      throw new Error(
-        "Expected single article but got different data structure",
-      );
-    }
-    if (options.expectedType === "article-list" && !result.articles) {
-      throw new Error("Expected article list but got different data structure");
-    }
-    if (options.expectedType === "comment-list" && !result.comments) {
-      throw new Error("Expected comment list but got different data structure");
-    }
-
     return { type: options.expectedType, ...result };
   } catch (err) {
     if (err) return { type: "error", error: err };
@@ -63,7 +50,6 @@ export const fetchUser = async (options: Options) => {
           body: JSON.stringify(options.body),
         });
 
-    console.log(response);
     if (!response.ok) {
       if (response.status === 404) throw new Error("User not found!");
       throw new Error(
@@ -71,8 +57,6 @@ export const fetchUser = async (options: Options) => {
       );
     }
     const result = await response.json();
-    if (!result.user)
-      throw new Error("Expected user but got different data structure!");
 
     return { type: "user", ...result.user };
   } catch (err) {

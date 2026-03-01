@@ -20,6 +20,10 @@ export const useUser = () => {
         url: ":baseUrl/users/:username",
       });
       if (userObj.type === "error") throw new Error(userObj.error);
+
+      if (userObj.type === user && !userObj.user)
+        throw new Error("Expected user but got different data structure!");
+
       setUser(userObj);
     } catch (err) {
       if (err && err instanceof Error) {
