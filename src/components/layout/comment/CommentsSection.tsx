@@ -67,7 +67,7 @@ export function CommentsSection({ articleId }: { articleId: string }) {
                   commentId: comment.comment_id,
                   url: ":baseUrl/comments/:comment_id",
                 }}
-                className="mt-3 text-c-burntpeach flex flex-row items-center justify-end gap-x-6"
+                className="mt-3 text-c-burntpeach flex flex-row items-center justify-end gap-x-3 sm:gap-x-6"
               />
             </li>
           );
