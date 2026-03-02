@@ -12,15 +12,17 @@ export function UserDisplay({}) {
 
   if (user)
     return (
-      <div className="flex flex-col items-center justify-center mr-2 w-14 h-22 my-auto">
+      <div className="hidden sm:flex flex-col items-center justify-center mr-2 w-14 h-22 my-auto">
         <Link
+          title={"Sign out"}
+          aria-label="Sign out"
           to={"/profile"}
           className="flex flex-col items-center justify-center"
         >
           <div className="user-avatar bg-c-burntpeach size-13 rounded-full flex items-center justify-center">
             {user.avatar_url && (
               <>
-                <div className="image-container p-1 bg-white rounded-full size-11 flex items-center justify-center overflow-hidden">
+                <div className="image-container p-1 bg-white rounded-full size-13 border-2 border-c-burntpeach flex items-center justify-center overflow-hidden">
                   <img
                     src={user.avatar_url}
                     className={`${imgLoading && "hidden"} object-contain`}
@@ -47,8 +49,10 @@ export function UserDisplay({}) {
     );
 
   return (
-    <div className="flex flex-col items-center justify-center mr-2 w-14 h-22 my-auto">
+    <div className="hidden sm:flex flex-col items-center justify-center mr-2 w-14 h-22  my-auto">
       <Link
+        title={"Sign in"}
+        aria-label="Sign in"
         to={"/login"}
         className="flex flex-col items-start justify-between h-full"
       >
@@ -57,7 +61,7 @@ export function UserDisplay({}) {
         </div>
 
         <span className="sm:text-sm cursor-pointer text-c-duskblue w-full text-center">
-          Log in
+          Sign in
         </span>
       </Link>
     </div>
