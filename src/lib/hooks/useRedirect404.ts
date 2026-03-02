@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { redirect } from "react-router";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 import type { AppError } from "../errors";
 
 export const useRedirect404 = (error: AppError | null) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    console.log("ERROR", error?.status);
     if (error?.status === 404) {
-      console.log("recirecting");
-      redirect("/404");
+      navigate("/404");
     }
   }, [error]);
 };

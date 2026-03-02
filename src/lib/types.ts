@@ -7,7 +7,7 @@ export interface ArticleData {
   created_at: string;
   article_img_url: string;
   votes: number;
-  error: Error;
+  comment_count: number;
 }
 
 export interface Article {
@@ -41,6 +41,22 @@ export interface CommentList {
   total_count: number;
 }
 
+export interface TopicData {
+  slug: string;
+  description: string;
+  img_url: string;
+}
+
+export interface Topic {
+  type: "topic";
+  topic: TopicData;
+}
+
+export interface TopicList {
+  type: "topic-list";
+  topics: TopicData[];
+}
+
 export interface Page {
   type: "page";
   title: string;
@@ -66,7 +82,8 @@ export interface Options {
     | "article"
     | "comment"
     | "comment-list"
-    | "user";
+    | "user"
+    | "topic-list";
 }
 
 export interface TotalCount {
@@ -79,11 +96,19 @@ export type ContentResponse =
   | ArticleList
   | Comment
   | CommentList
-  | TotalCount;
+  | TotalCount
+  | TopicList
+  | Topic;
 
 export interface UserType {
   type: "user";
   name: "string";
   username: string;
   avatar_url: string;
+}
+
+export interface FilterType {
+  topic?: string;
+  sort?: string;
+  sortBy?: string;
 }

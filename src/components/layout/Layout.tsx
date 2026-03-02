@@ -15,11 +15,18 @@ export function Layout({}: {}) {
     <div className="max-w-screen min-h-screen">
       {globalError && <ErrorDisplay error={globalError} />}
       <Routes>
-        <Route path="/" element={<ArticleList />} />
+        <Route path="/" element={<ArticleList enableListControls={false} />} />
         <Route path="/articles/:articleId" element={<SingleArticle />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/topics/:topic" element={<ArticleList />} />
+        <Route
+          path="/archive/topics/:topic"
+          element={<ArticleList enableListControls={true} />}
+        />
+        <Route
+          path="/archive"
+          element={<ArticleList enableListControls={true} />}
+        />
         <Route path="/404" element={<NotFound />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

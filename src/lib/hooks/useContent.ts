@@ -55,6 +55,16 @@ export const useContent = (
         "Expected comment list but got different data structure",
       );
     }
+    if (response.type === "topic-list" && !response.topics) {
+      throw new AppError(
+        "Expected topic list but got different data structure",
+      );
+    }
+    if (response.type === "topic" && !response.topic) {
+      throw new AppError(
+        "Expected topic list but got different data structure",
+      );
+    }
   };
 
   return { content, error, loading, setTrigger };

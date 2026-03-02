@@ -1,25 +1,44 @@
+import type { FilterType } from "../../../lib/types";
+import { useEffect } from "react";
 import { useParams } from "react-router";
 import ArticleCardItem from "./ArticleCardItem";
 import { fetchContent } from "../../../lib/api";
 import { useContent } from "../../../lib/hooks/useContent";
 import { useScrollToTop } from "../../../lib/hooks/useScrollToTop";
 import { useRedirect404 } from "../../../lib/hooks/useRedirect404";
+import ListControls from "./ListControls";
 
-export function ArticleList({}: {}) {
-  const filter = useParams();
+export function ArticleList({
+  enableListControls,
+}: {
+  enableListControls: boolean;
+}) {
+  const params = useParams();
 
-  const { content, loading, error } = useContent(fetchContent, {
-    queryParams: { limit: 100, ...filter },
-    url: `:baseUrl/articles`,
-    expectedType: "article-list",
-  });
+  const filter: FilterType = params;
+
+  const { content, loading, error, setTrigger } = useContent(
+    fetchContent,
+    {
+      queryParams: { limit: 100, ...filter },
+      url: `:baseUrl/articles`,
+      expectedType: "article-list",
+    },
+    "trigger",
+  );
 
   useRedirect404(error);
 
   useScrollToTop();
 
+  useEffect(() => {
+    // setFilter(_filter);
+    setTrigger(true);
+  }, [filter]);
+
   return (
-    <div key={filter ? filter.toString() : "no-filter"}>
+    <div>
+      {enableListControls && <ListControls />}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 max-w-400 items-end mx-auto p-3">
         {!loading &&
           content?.type === "article-list" &&
