@@ -21,7 +21,7 @@ export function ArticleList({
   const order = searchParams.get("order") || "";
 
   const filter = useMemo<QueryParams>(
-    () => ({ topic: params.topic || "" }),
+    () => (params.topic ? { topic: params.topic } : {}),
     [params.topic],
   );
 
@@ -43,7 +43,6 @@ export function ArticleList({
   useScrollToTop();
 
   useEffect(() => {
-    // setFilter(_filter);
     setTrigger(true);
   }, [filter, searchParams]);
 

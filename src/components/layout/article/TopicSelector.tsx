@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { useContent } from "../../../lib/hooks/useContent";
+import { useTopicSelector } from "../../../lib/hooks/useTopicSelector";
 import { fetchContent } from "../../../lib/api";
-import type { QueryParams } from "../../../lib/types";
-import { useNavigate } from "react-router";
 import { Minus, Newspaper, Plus, Trash2 } from "lucide-react";
 
 export function TopicSelector({}: {}) {
@@ -11,26 +9,8 @@ export function TopicSelector({}: {}) {
     expectedType: "topic-list",
   });
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const handleDropDownBtn = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const navigate = useNavigate();
-
-  const updateFilter = (filter: QueryParams) => {
-    if (filter?.topic) {
-      navigate("/archive/topics/" + filter.topic);
-    } else {
-      navigate("/archive/");
-    }
-    setIsOpen(false);
-  };
-
-  const handleTopicUpdate = (value: string) => {
-    updateFilter({ topic: value });
-  };
+  const { handleDropDownBtn, handleTopicUpdate, isOpen, params } =
+    useTopicSelector();
 
   if (content?.type === "topic-list")
     return (
@@ -61,7 +41,7 @@ export function TopicSelector({}: {}) {
                 return (
                   <button
                     key={topic.slug}
-                    className="text-center hover:bg-c-jetblack/50 py-2 text-white"
+                    className={`${topic.slug === params.topic && "bg-c-jetblack"} text-center hover:bg-c-jetblack/50 py-2 text-white`}
                     onClick={() => {
                       handleTopicUpdate(topic.slug);
                     }}
