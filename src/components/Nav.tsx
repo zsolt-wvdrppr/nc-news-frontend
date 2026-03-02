@@ -11,7 +11,7 @@ export function Nav({ pages }: { pages: Array<Page> }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsOpen(!isOpen);
+    setIsOpen(false);
   }, [path]);
 
   const handleMenuButton = () => {
@@ -40,7 +40,7 @@ export function Nav({ pages }: { pages: Array<Page> }) {
         </button>
 
         <div
-          className={`${isOpen ? "opacity-0 -z-50 -translate-y-12" : "opacity-100 z-50"} absolute border-b border-c-burntpeach transition-all top-20 left-0 w-full bg-linear-to-t from-c-white/50 to-transparent backdrop-blur-sm p-3 rounded-2xl`}
+          className={`${isOpen ? "opacity-100 z-50" : "opacity-0 -z-50 -translate-y-12"} absolute border-b border-c-burntpeach transition-all top-20 left-0 w-full bg-linear-to-t from-c-white/50 to-transparent backdrop-blur-sm p-3 rounded-2xl`}
         >
           <ul className="flex flex-col gap-8 p-5">
             {pages.map((page) => {
