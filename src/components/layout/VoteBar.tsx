@@ -6,11 +6,11 @@ import type { Options } from "../../lib/types";
 
 export function VoteBar({
   votes: initialVotes,
-  options = {},
+  options,
   ...props
 }: {
   votes: number;
-  options?: Options;
+  options: Options;
 } & ComponentPropsWithoutRef<"div">) {
   const [votes, setVotes] = useState(initialVotes);
 

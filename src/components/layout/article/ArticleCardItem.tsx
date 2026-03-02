@@ -64,6 +64,10 @@ export function ArticleCardItem({
             <VoteBar
               votes={Number(article.votes)}
               className="flex flex-row gap-3 text-white"
+              options={{
+                url: ":baseUrl/articles/:article_id",
+                articleId: article.article_id.toString(),
+              }}
             />
           </div>
         </div>
