@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useContent } from "../../../lib/hooks/useContent";
 import { fetchContent } from "../../../lib/api";
-import type { FilterType } from "../../../lib/types";
+import type { QueryParams } from "../../../lib/types";
 import { useNavigate } from "react-router";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Newspaper, Plus, Trash2 } from "lucide-react";
 
 export function TopicSelector({}: {}) {
   const { content } = useContent(fetchContent, {
@@ -19,7 +19,7 @@ export function TopicSelector({}: {}) {
 
   const navigate = useNavigate();
 
-  const updateFilter = (filter: FilterType) => {
+  const updateFilter = (filter: QueryParams) => {
     if (filter?.topic) {
       navigate("/archive/topics/" + filter.topic);
     } else {
@@ -34,17 +34,18 @@ export function TopicSelector({}: {}) {
 
   if (content?.type === "topic-list")
     return (
-      <div className="topic-selector-container w-fit min-w-60 mb-12">
+      <div className="topic-selector-container w-fit sm:min-w-60 ml-3">
         <div
           id="topic-selector"
           className={`relative font-semibold text-lg outline-none rounded-xl flex flex-col`}
         >
           <button
             key="default-key"
-            className={`${isOpen ? "rounded-t-xl" : "rounded-xl"} z-20 bg-c-duskblue pb-2 transition-all duration-50 relative text-center text-white font-semibold flex flex-row items-center justify-center px-2`}
+            className={`${isOpen ? "rounded-t-xl" : "rounded-xl"} pl-4 pr-9 z-20 bg-c-duskblue pb-2 transition-all duration-50 relative text-center text-white font-semibold flex flex-row items-center justify-center`}
             onClick={handleDropDownBtn}
           >
-            <span className="pt-1">{"- Select Topic -"}</span>
+            <Newspaper className="hidden sm:block mt-2 mr-4" />
+            <span className="pt-1 mt-1 text-left w-full">{"Select Topic"}</span>
             {isOpen && (
               <Minus className="absolute right-0 stroke-white mt-2 mr-1" />
             )}
@@ -70,13 +71,15 @@ export function TopicSelector({}: {}) {
                 );
               })}
             <button
+              aria-label="Reset topic filter"
               key={"reset"}
+              title="Reset topic filter"
               className="text-center hover:bg-c-burntpeach/50 py-2 text-white flex flex-row justify-center"
               onClick={() => {
                 handleTopicUpdate("");
               }}
             >
-              <Trash2 className="absolute left-5 bottom-4" /> {"- Reset -"}
+              <Trash2 className="size-6" />
             </button>
           </div>
         </div>
