@@ -1,8 +1,10 @@
 export function Footer() {
   return (
-    <>
-      <p>Footer</p>
-    </>
+    <div className="w-full h-32 bg-c-jetblack text-white text-center flex justify-center items-center">
+      <p className="text-lg">
+        Please note, this site is still a work in progress!
+      </p>
+    </div>
   );
 }
 
