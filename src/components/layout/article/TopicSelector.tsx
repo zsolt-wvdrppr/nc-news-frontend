@@ -14,7 +14,7 @@ export function TopicSelector({}: {}) {
 
   if (content?.type === "topic-list")
     return (
-      <div className="topic-selector-container w-fit sm:min-w-60 ml-3">
+      <div className="topic-selector-container w-fit sm:min-w-60">
         <div
           id="topic-selector"
           className={`relative font-semibold text-lg outline-none rounded-xl flex flex-col`}
