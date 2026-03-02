@@ -66,6 +66,9 @@ export interface Page {
 export interface QueryParams {
   limit?: number;
   p?: number;
+  order?: string;
+  sortBy?: string;
+  topic?: string;
 }
 
 export interface Options {
@@ -105,10 +108,4 @@ export interface UserType {
   name: "string";
   username: string;
   avatar_url: string;
-}
-
-export interface FilterType {
-  topic?: string;
-  sort?: string;
-  sortBy?: string;
 }

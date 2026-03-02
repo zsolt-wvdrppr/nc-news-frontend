@@ -1,6 +1,6 @@
-import type { FilterType } from "../../../lib/types";
-import { useEffect } from "react";
-import { useParams } from "react-router";
+import type { QueryParams } from "../../../lib/types";
+import { useEffect, useMemo } from "react";
+import { useParams, useSearchParams } from "react-router";
 import ArticleCardItem from "./ArticleCardItem";
 import { fetchContent } from "../../../lib/api";
 import { useContent } from "../../../lib/hooks/useContent";
@@ -15,7 +15,18 @@ export function ArticleList({
 }) {
   const params = useParams();
 
-  const filter: FilterType = params;
+  const [searchParams] = useSearchParams();
+
+  const sortBy = searchParams.get("sortBy") || "";
+  const order = searchParams.get("order") || "";
+
+  const filter = useMemo<QueryParams>(
+    () => ({ topic: params.topic || "" }),
+    [params.topic],
+  );
+
+  if (sortBy) filter.sortBy = sortBy;
+  if (order) filter.order = order;
 
   const { content, loading, error, setTrigger } = useContent(
     fetchContent,
@@ -34,7 +45,7 @@ export function ArticleList({
   useEffect(() => {
     // setFilter(_filter);
     setTrigger(true);
-  }, [filter]);
+  }, [filter, searchParams]);
 
   return (
     <div className="max-w-400 mx-auto">

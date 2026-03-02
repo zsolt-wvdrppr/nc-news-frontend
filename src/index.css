@@ -24,3 +24,7 @@
 h1 {
   @apply text-5xl;
 }
+
+.click-animation {
+  @apply active:scale-150 active:opacity-50;
+}

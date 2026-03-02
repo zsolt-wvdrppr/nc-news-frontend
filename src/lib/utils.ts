@@ -45,7 +45,7 @@ export const formatQueryParams = (queryParams: QueryParams) => {
   for (const [key, value] of Object.entries(queryParams)) {
     queryParamsStr += key + "=" + value + "&";
   }
-  return queryParamsStr;
+  return queryParamsStr.slice(0, -1);
 };
 
 export const buildURL = (options: Options) => {
