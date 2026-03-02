@@ -13,7 +13,7 @@ export function Header() {
           { type: "page", title: "About", path: "/about" },
         ]}
       />
-      <UserDisplay />
+      <UserDisplay className="hidden sm:flex" />
     </div>
   );
 }

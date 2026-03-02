@@ -4,7 +4,7 @@ import { useUser } from "../../../lib/hooks/useUser";
 import { Link } from "react-router";
 import { KeyRound, Loader, UserIcon } from "lucide-react";
 
-export function UserDisplay({}) {
+export function UserDisplay({ className = "" }: { className?: string }) {
   const [imgLoading, setImgLoading] = useState<boolean>(true);
 
   const { user } = useContext(UserContext);
@@ -12,7 +12,9 @@ export function UserDisplay({}) {
 
   if (user)
     return (
-      <div className="hidden sm:flex flex-col items-center justify-center mr-2 w-14 h-22 my-auto">
+      <div
+        className={`flex-col items-center justify-center mr-2 w-14 h-22 my-auto ${!className ? "flex" : className}`}
+      >
         <Link
           title={"Sign out"}
           aria-label="Sign out"
@@ -49,7 +51,9 @@ export function UserDisplay({}) {
     );
 
   return (
-    <div className="hidden sm:flex flex-col items-center justify-center mr-2 w-14 h-22  my-auto">
+    <div
+      className={`${!className ? "flex" : className} flex-col items-center justify-center mr-2 w-14 h-22  my-auto`}
+    >
       <Link
         title={"Sign in"}
         aria-label="Sign in"

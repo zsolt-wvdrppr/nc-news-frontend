@@ -34,13 +34,14 @@ export function Nav({ pages }: { pages: Array<Page> }) {
           );
         })}
       </ul>
+      {/* Mobile Menu*/}
       <div className="mobile-menu sm:hidden flex flex-col items-center justify-center">
         <button className="mr-5" onClick={handleMenuButton}>
           <Menu className="size-10" />
         </button>
 
         <div
-          className={`${isOpen ? "opacity-100 z-50" : "opacity-0 -z-50 -translate-y-12"} absolute border-b border-c-burntpeach transition-all top-20 left-0 w-full bg-linear-to-t from-c-white/50 to-transparent backdrop-blur-sm p-3 rounded-2xl`}
+          className={`${isOpen ? "opacity-100 z-50" : "opacity-0 -z-50 -translate-y-12"} absolute border-b border-c-burntpeach transition-all top-20 left-0 w-full bg-linear-to-t from-white to-transparent backdrop-blur-sm p-3 rounded-2xl`}
         >
           <ul className="flex flex-col gap-8 p-5">
             {pages.map((page) => {
@@ -56,7 +57,7 @@ export function Nav({ pages }: { pages: Array<Page> }) {
               );
             })}
           </ul>
-          <div className="rounded-2xl pl-10 mt-10 w-fit mx-auto">
+          <div className="rounded-2xl mt-10 w-fit mx-auto">
             <UserDisplay />
           </div>
         </div>
