@@ -7,6 +7,7 @@ import { useContext } from "react";
 import ErrorContext from "../../lib/contexts/ErrorContext";
 import LogIn from "./user/LogIn";
 import SignUp from "./user/SignUp";
+import About from "./About";
 
 export function Layout({}: {}) {
   const { globalError } = useContext(ErrorContext);
@@ -28,6 +29,7 @@ export function Layout({}: {}) {
           element={<ArticleList enableListControls={true} />}
         />
         <Route path="/404" element={<NotFound />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
