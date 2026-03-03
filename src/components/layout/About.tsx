@@ -1,10 +1,4 @@
-import {
-  ChevronsLeftRightEllipsis,
-  Key,
-  Lamp,
-  LampDesk,
-  Server,
-} from "lucide-react";
+import { ChevronsLeftRightEllipsis, Key, LampDesk, Server } from "lucide-react";
 import { Link } from "react-router";
 
 export function About({}) {
