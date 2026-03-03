@@ -1,7 +1,7 @@
 import { useContent } from "../../../lib/hooks/useContent";
 import { useTopicSelector } from "../../../lib/hooks/useTopicSelector";
 import { fetchContent } from "../../../lib/api";
-import { Minus, Newspaper, Plus, Trash2 } from "lucide-react";
+import { Loader, Minus, Newspaper, Plus, Trash2 } from "lucide-react";
 
 export function TopicSelector({}: {}) {
   const { content, loading } = useContent(fetchContent, {
@@ -67,7 +67,9 @@ export function TopicSelector({}: {}) {
     );
 
   return (
-    <div className="topic-selector-container w-[148.5px] sm:min-w-60 ml-3 h-11 bg-c-duskblue animate-pulse rounded-xl" />
+    <div className="relative topic-selector-container w-[148.5px] sm:min-w-60 h-11 bg-c-duskblue animate-pulse rounded-xl">
+      <Loader className="absolute right-1/2 translate-x-1/2 stroke-white mt-2.5 mr-1 animate-spin" />
+    </div>
   );
 }
 
