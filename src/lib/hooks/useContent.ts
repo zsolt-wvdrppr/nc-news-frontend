@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext, useCallback } from "react";
 import ErrorContext from "../contexts/ErrorContext";
 import type { Options, ContentResponse } from "../types";
 import { AppError as AppError } from "../errors";
@@ -6,16 +6,16 @@ import { AppError as AppError } from "../errors";
 export const useContent = (
   fetchFunction: (options: Options) => Promise<ContentResponse>,
   options: Options,
-  mode?: string,
+  //mode?: string,
 ) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<AppError | null>(null);
   const [content, setContent] = useState<ContentResponse>();
-  const [trigger, setTrigger] = useState<boolean>(false);
+
+  //const [trigger, setTrigger] = useState<boolean>(false);
   const { setGlobalError } = useContext(ErrorContext);
 
-  useEffect(() => {
-    if (mode === "trigger" && !trigger) return;
+  const doTrigger = useCallback(() => {
     const fetchContent = async () => {
       try {
         setLoading(true);
@@ -31,12 +31,12 @@ export const useContent = (
           setGlobalError(appError);
         }
       } finally {
-        if (mode === "trigger") setTrigger(false);
+        //if (mode === "trigger") setTrigger(false);
         setLoading(false);
       }
     };
     fetchContent();
-  }, [fetchFunction, trigger]);
+  }, []);
 
   const validateResponseType = (response: ContentResponse) => {
     // Validate the response matches expectedType
@@ -67,5 +67,5 @@ export const useContent = (
     }
   };
 
-  return { content, error, loading, setTrigger };
+  return { content, error, loading, doTrigger };
 };

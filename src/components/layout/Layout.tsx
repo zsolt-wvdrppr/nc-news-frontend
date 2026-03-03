@@ -10,12 +10,14 @@ import SignUp from "./user/SignUp";
 import About from "./About";
 import HomePage from "./HomePage";
 
-export function Layout({}: {}) {
-  const { globalError } = useContext(ErrorContext);
+export function Layout() {
+  const { globalError, setGlobalError } = useContext(ErrorContext);
 
   return (
     <div className="max-w-screen min-h-screen">
-      {globalError && <ErrorDisplay error={globalError} />}
+      {globalError && (
+        <ErrorDisplay error={globalError} setError={setGlobalError} />
+      )}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/articles/:articleId" element={<SingleArticle />} />

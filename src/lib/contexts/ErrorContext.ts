@@ -3,7 +3,7 @@ import { AppError } from "../errors";
 
 export interface ErrorContextType {
   globalError: AppError | null;
-  setGlobalError: (globalError: AppError) => void;
+  setGlobalError: (globalError: AppError | null) => void;
 }
 
 const ErrorContext = createContext<ErrorContextType>({

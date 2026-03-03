@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import type { QueryParams } from "../types";
 import { useNavigate, useLocation, useSearchParams } from "react-router";
 
@@ -9,19 +9,16 @@ export const useFilterSelector = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [activeFilter, setActiveFilter] = useState<Array<string>>([]);
 
-  useEffect(() => {
-    const sortBy = searchParams.get("sortBy");
-    const order = searchParams.get("order");
+  const sortBy = searchParams.get("sortBy");
+  const order = searchParams.get("order");
 
-    if (sortBy && order) {
-      setActiveFilter([sortBy, order]);
-    } else {
-      setActiveFilter([]);
-    }
-    setIsOpen(false);
-  }, [searchParams, pathname]);
+  const filter = useMemo<QueryParams>(() => {
+    const output: QueryParams = {};
+    if (sortBy) output.sortBy = sortBy;
+    if (order) output.order = order;
+    return output;
+  }, [sortBy, order]);
 
   const handleDropDownBtn = () => {
     setIsOpen(!isOpen);
@@ -44,5 +41,5 @@ export const useFilterSelector = () => {
     updateFilter({ sortBy, order });
   };
 
-  return { handleDropDownBtn, handleReset, handleSortBy, activeFilter, isOpen };
+  return { handleDropDownBtn, handleReset, handleSortBy, filter, isOpen };
 };

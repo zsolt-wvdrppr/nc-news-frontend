@@ -5,7 +5,7 @@ import { useScrollToTop } from "../../../lib/hooks/useScrollToTop";
 import UserContext from "../../../lib/contexts/UserContext";
 import { useUser } from "../../../lib/hooks/useUser";
 
-export function LogIn({}) {
+export function LogIn() {
   const { validateUser, logOut } = useUser();
   const { user } = useContext(UserContext);
   useScrollToTop();

@@ -20,30 +20,26 @@ export function ArticleList({
   const sortBy = searchParams.get("sortBy") || "";
   const order = searchParams.get("order") || "";
 
-  const filter = useMemo<QueryParams>(
-    () => (params.topic ? { topic: params.topic } : {}),
-    [params.topic],
-  );
+  const filter = useMemo<QueryParams>(() => {
+    const output: QueryParams = {};
+    if (params.topic) output.topic = params.topic;
+    if (sortBy) output.sortBy = sortBy;
+    if (order) output.order = order;
+    return output;
+  }, [params.topic, sortBy, order]);
 
-  if (sortBy) filter.sortBy = sortBy;
-  if (order) filter.order = order;
-
-  const { content, loading, error, setTrigger } = useContent(
-    fetchContent,
-    {
-      queryParams: { limit: 100, ...filter },
-      url: `:baseUrl/articles`,
-      expectedType: "article-list",
-    },
-    "trigger",
-  );
+  const { content, loading, error, doTrigger } = useContent(fetchContent, {
+    queryParams: { limit: 100, ...filter },
+    url: `:baseUrl/articles`,
+    expectedType: "article-list",
+  });
 
   useRedirect404(error);
 
   useScrollToTop();
 
   useEffect(() => {
-    setTrigger(true);
+    doTrigger();
   }, [filter, searchParams]);
 
   return (

@@ -13,7 +13,7 @@ export const usePushComment = (
     if (content?.type !== "comment") return;
     const newCommentId = content?.comment?.comment_id;
     if (newCommentId) {
-      let hasComment =
+      const hasComment =
         comments.filter(
           (comment: CommentData) => comment.comment_id === newCommentId,
         ).length > 0;

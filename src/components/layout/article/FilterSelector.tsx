@@ -8,8 +8,8 @@ import {
   Trash2,
 } from "lucide-react";
 
-export function FilterSelector({}: {}) {
-  const { handleDropDownBtn, handleReset, handleSortBy, activeFilter, isOpen } =
+export function FilterSelector() {
+  const { handleDropDownBtn, handleReset, handleSortBy, filter, isOpen } =
     useFilterSelector();
 
   const sortByList = ["Title", "Topic", "Author", "Created_at", "Votes"];
@@ -43,11 +43,11 @@ export function FilterSelector({}: {}) {
             return (
               <div
                 key={item}
-                className={`text-left hover:bg-c-jetblack/50 py-2 text-white flex flex-row pl-4 justify-between ${item.toLocaleLowerCase() === activeFilter[0] && "bg-c-jetblack"}`}
+                className={`text-left hover:bg-c-jetblack/50 py-2 text-white flex flex-row pl-4 justify-between ${item.toLocaleLowerCase() === filter.sortBy && "bg-c-jetblack"}`}
               >
                 <span
                   className={
-                    item.toLocaleLowerCase() === activeFilter[0] ?
+                    item.toLocaleLowerCase() === filter.sortBy ?
                       "ml-1 font-semibold scale-120"
                     : ""
                   }
@@ -64,8 +64,8 @@ export function FilterSelector({}: {}) {
                     <ArrowDownWideNarrow
                       className={
                         (
-                          "desc" === activeFilter[1] &&
-                          item.toLocaleLowerCase() === activeFilter[0]
+                          "desc" === filter.order &&
+                          item.toLocaleLowerCase() === filter.sortBy
                         ) ?
                           "stroke-3 text-c-lightcyan scale-120"
                         : ""
@@ -81,8 +81,8 @@ export function FilterSelector({}: {}) {
                     <ArrowUpNarrowWide
                       className={
                         (
-                          "asc" === activeFilter[1] &&
-                          item.toLocaleLowerCase() === activeFilter[0]
+                          "asc" === filter.order &&
+                          item.toLocaleLowerCase() === filter.sortBy
                         ) ?
                           "stroke-3 text-c-lightcyan scale-120"
                         : ""
