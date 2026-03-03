@@ -25,6 +25,10 @@ h1 {
   @apply text-5xl;
 }
 
+h2 {
+  @apply text-2xl font-semibold;
+}
+
 .click-animation {
   @apply active:scale-150 active:opacity-50;
 }

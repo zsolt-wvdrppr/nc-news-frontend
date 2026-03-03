@@ -4,7 +4,7 @@ import { fetchContent } from "../../../lib/api";
 import { Minus, Newspaper, Plus, Trash2 } from "lucide-react";
 
 export function TopicSelector({}: {}) {
-  const { content } = useContent(fetchContent, {
+  const { content, loading } = useContent(fetchContent, {
     url: ":baseUrl/topics",
     expectedType: "topic-list",
   });
@@ -12,7 +12,7 @@ export function TopicSelector({}: {}) {
   const { handleDropDownBtn, handleTopicUpdate, isOpen, params } =
     useTopicSelector();
 
-  if (content?.type === "topic-list")
+  if (content?.type === "topic-list" && !loading)
     return (
       <div className="topic-selector-container w-fit sm:min-w-60">
         <div
@@ -65,6 +65,10 @@ export function TopicSelector({}: {}) {
         </div>
       </div>
     );
+
+  return (
+    <div className="topic-selector-container w-[148.5px] sm:min-w-60 ml-3 h-11 bg-c-duskblue animate-pulse rounded-xl" />
+  );
 }
 
 export default TopicSelector;

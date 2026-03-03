@@ -31,9 +31,9 @@ export function ArticleCardItem({
           className="group relative block"
           to={"/articles/" + article.article_id}
         >
-          <h3 className="font-bold text-xl h-full text-c-jetblack">
+          <h2 className="font-bold text-xl h-full text-c-jetblack">
             {article.title}
-          </h3>
+          </h2>
         </Link>
       : <div className="flex flex-col gap-1">
           <div className="h-6.5 bg-c-powderblue/90 rounded-2xl animate-pulse" />
