@@ -8,6 +8,7 @@ import ErrorContext from "../../lib/contexts/ErrorContext";
 import LogIn from "./user/LogIn";
 import SignUp from "./user/SignUp";
 import About from "./About";
+import HomePage from "./HomePage";
 
 export function Layout({}: {}) {
   const { globalError } = useContext(ErrorContext);
@@ -16,7 +17,7 @@ export function Layout({}: {}) {
     <div className="max-w-screen min-h-screen">
       {globalError && <ErrorDisplay error={globalError} />}
       <Routes>
-        <Route path="/" element={<ArticleList enableListControls={false} />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/articles/:articleId" element={<SingleArticle />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
