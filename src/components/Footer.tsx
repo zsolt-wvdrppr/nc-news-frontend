@@ -2,7 +2,8 @@ export function Footer() {
   return (
     <div className="w-full h-32 bg-c-jetblack text-white text-center flex justify-center items-center">
       <p className="text-lg">
-        Please note, this site is still a work in progress!
+        Portfolio project built during Northcoders Bootcamp | React • TypeScript
+        • Tailwind CSS
       </p>
     </div>
   );
