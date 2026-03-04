@@ -2,17 +2,12 @@ import { useContent } from "../../../lib/hooks/useContent";
 import { useTopicSelector } from "../../../lib/hooks/useTopicSelector";
 import { fetchContent } from "../../../lib/api";
 import { Loader, Minus, Newspaper, Plus, Trash2 } from "lucide-react";
-import { useEffect } from "react";
 
-export function TopicSelector() {
-  const { content, loading, doTrigger } = useContent(fetchContent, {
+export function TopicSelector({}: {}) {
+  const { content, loading } = useContent(fetchContent, {
     url: ":baseUrl/topics",
     expectedType: "topic-list",
   });
-
-  useEffect(() => {
-    doTrigger();
-  }, []);
 
   const { handleDropDownBtn, handleTopicUpdate, isOpen, params } =
     useTopicSelector();

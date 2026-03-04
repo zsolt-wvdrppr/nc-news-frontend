@@ -13,28 +13,24 @@ export function VoteBar({
   options: Options;
 } & ComponentPropsWithoutRef<"div">) {
   const [votes, setVotes] = useState(initialVotes);
-  const componentSpecificInfo: Options = {
-    method: "PATCH",
-    expectedType: "comment",
-  };
-  const [localOptions, setLocalOptions] = useState<Options>({
-    ...options,
-    ...componentSpecificInfo,
-  });
+
+  const { setTrigger } = useContent(fetchContent, options, "trigger");
+
+  options.method = "PATCH";
+  options.expectedType = "comment";
 
   const handleUpVote = () => {
-    setLocalOptions({ body: { inc_votes: 1 }, ...localOptions });
-    doTrigger();
+    options.body = { inc_votes: 1 };
+
+    setTrigger(true);
     setVotes(votes + 1);
   };
 
   const handleDownVote = () => {
-    setLocalOptions({ body: { inc_votes: -1 }, ...localOptions });
-    doTrigger();
+    options.body = { inc_votes: -1 };
+    setTrigger(true);
     setVotes(votes - 1);
   };
-
-  const { doTrigger } = useContent(fetchContent, localOptions);
 
   return (
     <div {...props}>

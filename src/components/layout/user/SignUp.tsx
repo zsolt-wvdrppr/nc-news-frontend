@@ -1,7 +1,7 @@
 import { UserRoundPlus } from "lucide-react";
 import { Link } from "react-router";
 
-export function SignUp() {
+export function SignUp({}) {
   return (
     <div>
       <h1 className="text-c-duskblue mx-auto w-fit">Signup page</h1>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { QueryParams } from "../types";
 import { useNavigate, useParams } from "react-router";
 
@@ -6,6 +6,10 @@ export const useTopicSelector = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [params]);
 
   const handleDropDownBtn = () => {
     setIsOpen(!isOpen);

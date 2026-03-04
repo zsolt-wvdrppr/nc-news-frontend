@@ -1,7 +1,7 @@
 import { ChevronsLeftRightEllipsis, Key, LampDesk, Server } from "lucide-react";
 import { Link } from "react-router";
 
-export function About() {
+export function About({}) {
   return (
     <article className="max-w-400 px-3 flex flex-col gap-5 pb-8 text-c-jetblack bg-linear-to-b from-transparent to-c-lightcyan/30">
       <header>

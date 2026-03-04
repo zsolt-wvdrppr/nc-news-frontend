@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { formatDate } from "../../../lib/utils";
 import { fetchContent } from "../../../lib/api";
@@ -7,22 +7,18 @@ import VoteBar from "../VoteBar";
 import { CommentsSection } from "../comment/CommentsSection";
 import { useScrollToTop } from "../../../lib/hooks/useScrollToTop";
 
-export function SingleArticle() {
+export function SingleArticle({}) {
   const { articleId } = useParams();
 
   useScrollToTop();
 
   const [imgLoading, setImgLoading] = useState<boolean>(true);
 
-  const { content, error, loading, doTrigger } = useContent(fetchContent, {
+  const { content, error, loading } = useContent(fetchContent, {
     articleId: articleId,
     url: ":baseUrl/articles/:article_id",
     expectedType: "article",
   });
-
-  useEffect(() => {
-    doTrigger();
-  }, []);
 
   if (content?.type !== "article") return;
 

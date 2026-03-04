@@ -1,6 +1,6 @@
 import { Menu } from "lucide-react";
 import type { Page } from "../lib/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import UserDisplay from "./layout/user/UserDisplay";
 
@@ -10,7 +10,9 @@ export function Nav({ pages }: { pages: Array<Page> }) {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const closeMenuButton = () => setIsOpen(false);
+  useEffect(() => {
+    setIsOpen(false);
+  }, [path]);
 
   const handleMenuButton = () => {
     setIsOpen(!isOpen);
@@ -48,7 +50,6 @@ export function Nav({ pages }: { pages: Array<Page> }) {
                   <Link
                     to={page?.path}
                     className={`block text-lg text-center shadow-md w-full hover:brightness-90 hover:shadow-none transition-all duration-1000 px-3 pt-1 pb-1.5 text-white rounded-xl font-semibold ${path === page.path ? "bg-c-burntpeach" : "bg-c-duskblue"}`}
-                    onClick={closeMenuButton}
                   >
                     {page?.title}
                   </Link>
