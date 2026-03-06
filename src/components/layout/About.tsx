@@ -169,7 +169,7 @@ export function About({}) {
                   target="_blank"
                   to="https://github.com/zsolt-wvdrppr/nc-news"
                 >
-                  https://github.com/zsolt-wvdrppr/nc-news
+                  https://github.com/zsolt-wvdrppr/nc-news/blob/main/README.md
                 </Link>
               </li>
               <li>
