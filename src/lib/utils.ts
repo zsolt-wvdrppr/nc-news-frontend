@@ -4,15 +4,7 @@ import type { QueryParams, Options } from "./types";
 export const formatDate = (dateStr: string) => {
   if (!dateStr) return;
 
-  const dayLookup = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  const dayLookup = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   const monthLookup = [
     "Jan",
