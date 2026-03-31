@@ -52,10 +52,10 @@ export function VoteBar({
     <div {...props}>
       <button aria-label="down-vote" onClick={handleDownVote}>
         <ThumbsUp
-          className={`rotate-180 active:scale-150 active:opacity-50 hover:scale-125 hover:stroke-1.5 transition-all cursor-pointer ${hasVote(articleId) === -1 ? "fill-white/60" : ""}`}
+          className={`translate-y-1 rotate-180 active:scale-150 active:opacity-50 hover:scale-125 hover:stroke-1.5 transition-all cursor-pointer ${hasVote(articleId) === -1 ? "fill-white/60" : ""}`}
         />
       </button>
-      <span className=" font-bold">{votes}</span>
+      <span className=" font-bold w-3">{votes}</span>
       <button>
         <ThumbsUp
           aria-label="up-vote"
