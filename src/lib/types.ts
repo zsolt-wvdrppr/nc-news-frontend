@@ -71,12 +71,17 @@ export interface QueryParams {
   topic?: string;
 }
 
+export interface RequestBodyType {
+  username?: string;
+  body: string;
+}
+
 export interface Options {
   queryParams?: QueryParams;
   articleId?: string;
   commentId?: number;
   username?: string;
-  body?: Object;
+  body?: RequestBodyType;
   url?: string;
   baseUrl?: string;
   method?: string;
