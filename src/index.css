@@ -6,6 +6,32 @@
   --color-c-lightcyan: #e0fbfc;
   --color-c-burntpeach: #ea481f;
   --color-c-jetblack: #293241;
+  --animate-spin-slow-left: spin-left 10s linear infinite;
+  --animate-spin-medium-left: animation: spin-left 1.5s linear infinite;
+  --animate-spin-slow-right: spin-right 4s linear infinite;
+  --animate-spin-medium-right: spin-right 1.5s linear infinite;
+  --animate-move-clock-wise: move 15s linear infinite;
+  --animate-move-anti-clock-wise: move 15s linear infinite reverse;
+  --animate-move-clock-wise-fast: move 8s linear infinite;
+  --animate-move-anti-clock-wise-fast: move 8s linear infinite reverse;
+
+  @keyframes spin-left {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+
+  @keyframes spin-right {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes move {
+    to {
+      offset-distance: 100%;
+    }
+  }
 }
 
 :root {
@@ -31,4 +57,28 @@ h2 {
 
 .click-animation {
   @apply active:scale-150 active:opacity-50;
+}
+
+.border-spinner {
+  clip-path: polygon(
+    0% 0%,
+    26% 0%,
+    28% 96%,
+    74% 96%,
+    73% 97%,
+    71% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%
+  );
+}
+
+.move-along-edge {
+  @apply absolute;
+  offset-path: inset(
+    10px round 12px
+  ); /* follows the element's own border box */
+  offset-distance: 0%;
+  will-change: offset-distance; /* hint to browser to promote to own layer */
+  transform: translateZ(0); /* force GPU layer if will-change isn't enough */
 }
