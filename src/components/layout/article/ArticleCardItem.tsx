@@ -67,9 +67,14 @@ export function ArticleCardItem({
             className={`${!isAllLoaded && "hidden"} relative bg-c-burntpeach text-right rounded-xl`}
           >
             <Link
+              title="Read more"
+              aria-label="Read more"
               className="group relative block"
               to={`/articles/${article.article_id}#`}
             >
+              <span className="absolute z-50 text-white right-0 top-0 p-1 backdrop-blur-sm rounded-bl-xl bg-black/20">
+                Read more
+              </span>
               <img
                 className="self-end h-52 w-full object-cover rounded-t-xl mb-1 group-hover:brightness-120 transition-all"
                 fetchPriority="high"
