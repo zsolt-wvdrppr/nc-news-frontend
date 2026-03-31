@@ -8,7 +8,7 @@ import {
   Trash2,
 } from "lucide-react";
 
-export function FilterSelector({}: {}) {
+export function FilterSelector() {
   const { handleDropDownBtn, handleReset, handleSortBy, activeFilter, isOpen } =
     useFilterSelector();
 

@@ -10,7 +10,7 @@ import SignUp from "./user/SignUp";
 import About from "./About";
 import HomePage from "./HomePage";
 
-export function Layout({}: {}) {
+export function Layout() {
   const { globalError } = useContext(ErrorContext);
 
   return (

@@ -7,7 +7,7 @@ import VoteBar from "../VoteBar";
 import { CommentsSection } from "../comment/CommentsSection";
 import { useScrollToTop } from "../../../lib/hooks/useScrollToTop";
 
-export function SingleArticle({}) {
+export function SingleArticle() {
   const { articleId } = useParams();
 
   useScrollToTop();
