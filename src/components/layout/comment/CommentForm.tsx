@@ -23,7 +23,7 @@ export function CommentForm({
     fetchContent,
     {
       url: ":baseUrl/articles/:article_id/comments",
-      body: { username: user?.username, body: localUserInput }, // Hardcoded user for development
+      body: { username: user?.username, body: localUserInput },
       method: "POST",
       articleId: articleId,
       expectedType: "comment",
