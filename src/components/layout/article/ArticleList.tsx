@@ -52,12 +52,13 @@ export function ArticleList({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 max-w-400 items-end mx-auto">
         {!loading &&
           content?.type === "article-list" &&
-          content.articles.map((article) => {
+          content.articles.map((article, index) => {
             return (
               <ArticleCardItem
                 key={article.article_id}
                 article={article}
                 loading={loading}
+                index={index}
               />
             );
           })}
