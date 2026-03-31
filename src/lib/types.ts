@@ -73,7 +73,8 @@ export interface QueryParams {
 
 export interface RequestBodyType {
   username?: string;
-  body: string;
+  body?: string;
+  inc_votes?: number;
 }
 
 export interface Options {
